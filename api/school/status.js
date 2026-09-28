@@ -1,6 +1,2 @@
-import { json, authConfigured } from "../../lib/http.js";
-export default async function handler(req,res){
- if(req.method!=="GET")return json(res,405,{error:"method_not_allowed"});
- const provider=(process.env.SCHOOL_PROVIDER||(process.env.EDUVULCAN_API_AP&&process.env.EDUVULCAN_KEYPAIR_JSON?"hebece":process.env.SCHOOL_FEED_URL?"feed":"")).toLowerCase();
- return json(res,200,{ok:true,provider:provider||null,configured:Boolean(provider),authConfigured:authConfigured(),hebeceConfigured:Boolean(process.env.EDUVULCAN_API_AP&&process.env.EDUVULCAN_KEYPAIR_JSON),feedConfigured:Boolean(process.env.SCHOOL_FEED_URL)});
-}
+import {authenticated,fail,json} from '../../lib/cloud.js';
+export default async function handler(req,res){if(req.method!=='GET')return fail(res,405,'method_not_allowed');const ctx=await authenticated(req);if(!ctx)return fail(res,401,'unauthorized');const provider=process.env.SCHOOL_PROVIDER||null,configured=provider==='hebece'?!!(process.env.EDUVULCAN_API_AP&&process.env.EDUVULCAN_KEYPAIR_JSON):provider==='feed'?!!process.env.SCHOOL_FEED_URL:false;const {data}=await ctx.client.from('school_sync_state').select('*').eq('user_id',ctx.user.id).maybeSingle();return json(res,200,{ok:true,provider,configured,status:configured?data?.status||'READY':'NOT_CONFIGURED',lastSuccessAt:data?.last_success_at||null});}

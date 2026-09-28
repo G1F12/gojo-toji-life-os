@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#090c12">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="GT Training">
+<meta name="apple-mobile-web-app-title" content="GT Life OS">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>GOJO × TOJI Life OS v5.1</title>
+<title>GOJO × TOJI · Life OS</title>
 <style>
 :root{
  --bg:#090c12;--bg2:#0d121c;--card:#131925;--card2:#182132;--line:#283247;
@@ -17,9 +17,9 @@
  --warn:#ffd06f;--bad:#ff8291;--violet:#a58cff;--shadow:0 14px 34px rgba(0,0,0,.25)
 }
 *{box-sizing:border-box}html,body{margin:0;background:linear-gradient(180deg,#080a0f,#0d1320 58%,#090c12);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif}
-body{min-height:100vh;padding-bottom:92px}button,input,select,textarea{font:inherit}
+body{min-height:100vh;padding-bottom:92px;padding-top:env(safe-area-inset-top)}button,input,select,textarea{font:inherit}
 header{position:sticky;top:0;z-index:40;background:rgba(9,12,18,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.top{max-width:980px;margin:auto;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.top{max-width:980px;margin:auto;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.top .row{flex:0 1 auto}.brand{min-width:0}
 .brand b{font-size:17px}.brand small{display:block;color:var(--muted);margin-top:2px}
 main{max-width:980px;margin:auto;padding:10px}
 .tabs{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:10px}
@@ -56,25 +56,40 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
 .fixed .inner{max-width:980px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .modal{display:none;position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.76);padding:14px;overflow:auto}.modal .card{max-width:690px;margin:36px auto}
 @media(max-width:680px){.tabs{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr 1fr}.muscleMap{grid-template-columns:1fr}.card{padding:12px}.timer{font-size:38px}}
+
+/* Life OS mobile design system */
+:root{--bg:#0b0d17;--bg2:#101421;--card:#171b2b;--card2:#22283a;--line:#2a3042;--text:#f7f7fc;--muted:#a9afc0;--blue:#8298f7;--violet:#9a80ef;--mint:#9fcbd0;--shadow:0 14px 38px rgba(0,0,0,.12)}
+html{scroll-behavior:smooth}body{background:radial-gradient(circle at 90% -5%,#202243 0,transparent 36%),var(--bg);padding-bottom:calc(90px + env(safe-area-inset-bottom));font-size:16px;line-height:1.45;overflow-x:hidden}button{cursor:pointer}button:disabled{opacity:.6;cursor:wait}button,input,select,textarea{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",Inter,sans-serif}
+header{background:rgba(11,13,23,.88);border-bottom:1px solid rgba(255,255,255,.05);top:env(safe-area-inset-top)}.top{padding:12px 18px;flex-wrap:nowrap}.brand b{font-size:18px;letter-spacing:.02em}.brand small{font-size:12px}.headerActions{display:flex;flex:0 0 auto;gap:8px;align-items:center}.headerActions>*{flex:none}.iconBtn{width:44px;height:44px;display:grid;place-items:center;padding:0;border-radius:14px}.iconBtn svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.headerLogin{display:none}
+main{max-width:800px;padding:18px 16px 30px}h2{font-size:21px;letter-spacing:-.025em}h3{font-size:17px;letter-spacing:-.015em}.card{background:var(--card);border:1px solid rgba(255,255,255,.045);box-shadow:none;border-radius:22px;padding:20px;margin:0 0 15px}.hero{background:radial-gradient(circle at 90% 0,rgba(129,138,248,.25),transparent 55%),#1b2032}.metric{background:#1d2333;border:0;border-radius:16px;padding:14px;min-width:0}.metric strong{font-size:22px;letter-spacing:-.04em}.grid2,.grid3,.grid4{gap:10px}.row{gap:10px}.btn{min-height:44px;border:0;background:#292f40;border-radius:13px;font-weight:650;padding:10px 15px}.btn.primary{color:white;background:linear-gradient(120deg,#6f88eb,#9778e6);box-shadow:0 7px 18px rgba(110,112,229,.2)}.btn.good{background:#24543c;color:#d1f8df}.btn.bad{background:#3d2632;color:#ffcad2}.btn.small{min-height:40px;font-size:13px}.btn:focus-visible,.tab:focus-visible,.muscleZone:focus-visible{outline:2px solid var(--blue);outline-offset:2px}label{font-size:13px;margin:13px 0 6px}input,select,textarea{background:#101522;border:1px solid #31394e;border-radius:13px;min-height:46px;padding:11px 12px;font-size:16px;outline:none}input:focus,select:focus,textarea:focus{border-color:#9a8df2;box-shadow:0 0 0 3px rgba(154,141,242,.15)}textarea{resize:vertical}.tiny{font-size:13px}.badge{font-size:12px;border:0;background:#29334e;color:#d6defe;padding:7px 10px}.note{border:0;background:#202b43;border-radius:13px;padding:12px}.exercise{padding:16px 0}.pill{border:0;background:#2a3551;font-size:12px}.setrow{grid-template-columns:22px repeat(3,minmax(0,1fr)) 44px;gap:5px}.setrow input{min-width:0;padding:8px 2px}.done{width:44px;height:44px}.day{background:#1e2434;border:0;min-width:0}.calendar{gap:3px}.calHead{font-size:11px}.progressWrap,canvas{border:0}.timer{font-size:45px}.panel{animation:appear .18s ease}@keyframes appear{from{opacity:.6;transform:translateY(4px)}to{opacity:1;transform:none}}
+.bottomNav{position:fixed;z-index:65;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:rgba(16,19,31,.96);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.07);padding:6px max(8px,env(safe-area-inset-left)) calc(5px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-right))}.tab{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2px;border:0;background:transparent;border-radius:12px;min-height:55px;font-weight:600;font-size:11px;color:#929bb0;padding:5px 2px}.tab.active{background:#2c3250;color:#e3e7ff}.tab svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.moreMenu{display:none;position:fixed;z-index:70;bottom:calc(75px + env(safe-area-inset-bottom));right:12px;left:12px;max-width:500px;margin:auto;background:#22283a;border:1px solid #353b50;border-radius:20px;padding:10px;box-shadow:0 20px 50px #0008}.moreMenu.open{display:grid;grid-template-columns:1fr 1fr;gap:6px}.moreMenu button{width:100%;text-align:left}
+.fixed{display:none;bottom:calc(68px + env(safe-area-inset-bottom));background:transparent;border:0;padding:8px 14px;pointer-events:none}.fixed.visible{display:block}body:has(input:focus,textarea:focus) #trainingAction{display:none}.fixed .inner{max-width:800px;grid-template-columns:1fr}.fixed .btn{pointer-events:auto;box-shadow:0 12px 36px #0008}.panel#workout.active{padding-bottom:66px}.modal{z-index:100;background:rgba(2,4,12,.7);padding:16px;align-items:center;justify-content:center}.modal.open{display:flex}.modal .card{width:min(100%,650px);max-height:calc(100dvh - 32px);overflow:auto;margin:0;box-shadow:0 30px 60px #0009}.modalHeader{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}.modalHeader h2{margin:0}.settingsGroup{padding:15px 0;border-top:1px solid #303547}.settingsGroup h3{margin:0 0 8px}.settingsGroup:first-of-type{border:0}.settingsGroup p{margin-bottom:8px}.loginSheet{max-width:460px!important}.passwordRow{position:relative}.passwordRow input{padding-right:64px}.passwordRow button{position:absolute;right:4px;top:4px;min-height:38px;background:transparent;font-size:13px}.inlineError{min-height:22px;color:#ffb5c1;font-size:14px;margin-top:8px}.toast{position:fixed;z-index:150;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translate(-50%,12px);background:#30384e;color:#fff;border-radius:14px;padding:11px 16px;box-shadow:0 10px 35px #0009;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;max-width:calc(100vw - 32px);text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.dangerCard{background:#211923}.dangerCard p{color:var(--muted)}.syncActions{display:flex;gap:8px;flex-wrap:wrap}.syncActions .btn{flex:1 1 160px}.hidden{display:none!important}
+.muscleMap{display:block}.silhouette{padding:0;background:#100e1c;border:0;overflow:hidden;border-radius:18px}.silhouette svg{display:block;width:100%;height:auto}.muscleZone{fill:#8d95f8;fill-opacity:var(--intensity);stroke:#e7e4ff;stroke-width:1.5;stroke-opacity:.55;cursor:pointer;transition:fill-opacity .18s}.muscleZone:hover,.muscleZone:focus{fill-opacity:.8;stroke-width:2.5}.muscleLegend{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:12px;font-size:13px;color:var(--muted)}.legendGradient{width:110px;height:8px;border-radius:20px;background:linear-gradient(90deg,#c1c4d5,#758eea)}.muscleDetail{min-height:35px;text-align:center;font-size:14px;padding:10px;color:#dfe4ff}
+@media(max-width:680px){.grid3{grid-template-columns:1fr 1fr}.grid4{grid-template-columns:1fr 1fr}.card{padding:17px}.muscleMap{grid-template-columns:1fr}.top{padding:10px 14px}.headerActions .badge{font-size:10px;max-width:125px;line-height:1.2}.headerLogin{display:inline-flex;align-items:center}.brand small{font-size:11px}.modal{align-items:flex-end;padding:0}.modal .card{max-width:none;max-height:calc(100dvh - env(safe-area-inset-top) - 20px);border-radius:24px 24px 0 0;padding:23px 18px calc(22px + env(safe-area-inset-bottom))}.grid3 .row{min-width:0}}
+@media(max-width:375px){.top{gap:5px}.brand b{font-size:16px}.headerActions{gap:4px}.headerActions .badge{max-width:106px;padding:6px}.headerLogin{padding:6px 8px;font-size:12px;min-height:40px}.iconBtn{width:40px;height:40px}.card{padding:15px}}
+
+/* v6 QA hotfix: desktop layout */
+@media (min-width:681px){
+  .top{max-width:1180px;margin:0 auto;padding:12px 20px}
+  main{max-width:1180px;padding:22px 20px 125px}
+  .headerLogin{display:inline-flex!important;align-items:center}
+  .bottomNav{
+    left:50%;right:auto;bottom:18px;transform:translateX(-50%);
+    width:min(760px,calc(100vw - 32px));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:6px;
+    box-shadow:0 18px 45px #0007
+  }
+  .silhouette{max-width:900px;margin:0 auto}
+}
+
 </style>
+<script src="assets/life-data.js"></script>
 </head>
 <body>
-<header><div class="top">
-  <div class="brand"><b>GOJO × TOJI — Life OS v5.1</b><small>70% Gojo · 30% Toji · lean V-frame · 4×/нед</small></div>
-  <div class="row" style="flex-wrap:nowrap"><button id="installBtn" class="btn small" style="display:none">Установить</button><button class="btn small" onclick="openSettings()">⚙︎</button></div>
-</div></header>
-
+<header><div class="top"><div class="brand"><b>GOJO × TOJI</b><small>70% Gojo · 30% Toji</small></div><div class="headerActions"><span id="cloudStatus" class="badge">● Облако выключено</span><button id="headerLogin" class="btn small headerLogin" onclick="openLogin()">Войти</button><button class="btn iconBtn" aria-label="Настройки" onclick="openSettings()"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2" fill="#292f40"/><circle cx="16" cy="12" r="2" fill="#292f40"/><circle cx="8" cy="18" r="2" fill="#292f40"/></svg></button></div></div></header>
 <main>
-<div class="tabs">
- <div class="tab active" data-tab="today">Сегодня</div>
- <div class="tab" data-tab="workout">Тренировка</div>
- <div class="tab" data-tab="progress">Прогресс</div>
- <div class="tab" data-tab="review">Неделя</div>
- <div class="tab" data-tab="body">Тело</div>
- <div class="tab" data-tab="school">Школа</div>
- <div class="tab" data-tab="data">Данные</div>
-</div>
-
 <section id="today" class="panel active">
  <div class="card hero">
   <div class="row">
@@ -83,7 +98,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
     <h2 id="todayTitle" style="font-size:24px;margin-top:10px">—</h2>
     <p id="todaySub" class="muted">—</p>
    </div>
-   <div class="metric" style="max-width:150px"><span class="tiny muted">Readiness</span><strong id="readyScore">—</strong><span class="unit">/100</span></div>
+   <div class="metric" style="max-width:150px"><span class="tiny muted">Готовность</span><strong id="readyScore">—</strong><span class="unit">/100</span></div>
   </div>
   <div id="readyAdvice" class="note tiny"></div>
  </div>
@@ -95,11 +110,11 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
   <div class="metric"><span class="tiny muted">Шаги</span><strong id="dashSteps">—</strong></div>
  </div>
  <div class="card">
-  <div class="row"><div style="flex:3"><h3 style="margin-bottom:4px">School load</h3><div id="todaySchoolItems" class="tiny muted">—</div></div><div class="metric" style="max-width:150px"><span class="tiny muted">Нагрузка</span><strong id="schoolLoadScore">—</strong><span class="unit">/10</span></div></div>
+  <div class="row"><div style="flex:3"><h3 style="margin-bottom:4px">Школьная нагрузка</h3><div id="todaySchoolItems" class="tiny muted">—</div></div><div class="metric" style="max-width:150px"><span class="tiny muted">Нагрузка</span><strong id="schoolLoadScore">—</strong><span class="unit">/10</span></div></div>
  </div>
 
  <div class="card">
-  <h3>Быстрый check-in</h3>
+  <h3>Самочувствие сегодня</h3>
   <div class="grid3">
    <div><label>Сон, ч</label><input id="quickSleep" type="number" step=".1" placeholder="8.5"></div>
    <div><label>Энергия /10</label><input id="quickEnergy" type="number" min="1" max="10" placeholder="8"></div>
@@ -109,32 +124,10 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
    <div><label>Стресс /10</label><input id="quickStress" type="number" min="0" max="10" placeholder="3"></div>
    <div><label>Кисть /10</label><input id="quickWrist" type="number" min="0" max="10" placeholder="1"></div>
   </div>
-  <button class="btn primary" style="width:100%;margin-top:10px" onclick="saveReadiness()">Сохранить readiness</button>
+  <button class="btn primary" style="width:100%;margin-top:10px" onclick="saveГотовность()">Сохранить самочувствие</button>
  </div>
 
- <div class="card">
-  <h3>Карта приоритетов</h3>
-  <div class="muscleMap">
-   <div class="silhouette">
-    <svg viewBox="0 0 220 360" aria-label="front body map">
-      <defs><linearGradient id="hi" x1="0" x2="1"><stop stop-color="#7aa2ff"/><stop offset="1" stop-color="#8ee3cf"/></linearGradient></defs>
-      <circle cx="110" cy="35" r="24" fill="#273247"/>
-      <path d="M82 64 Q110 52 138 64 L151 115 Q145 152 134 185 L132 245 L151 338 L126 338 L110 255 L94 338 L69 338 L88 245 L86 185 Q75 152 69 115 Z" fill="#202a3d" stroke="#46526a" stroke-width="2"/>
-      <ellipse cx="74" cy="90" rx="20" ry="27" fill="url(#hi)" opacity=".95"/><ellipse cx="146" cy="90" rx="20" ry="27" fill="url(#hi)" opacity=".95"/>
-      <path d="M87 91 Q110 78 133 91 L129 125 Q110 134 91 125 Z" fill="#7aa2ff" opacity=".8"/>
-      <path d="M89 127 Q110 139 131 127 L129 162 Q110 171 91 162 Z" fill="#8ee3cf" opacity=".32"/>
-      <path d="M84 80 Q63 95 61 145" fill="none" stroke="#8ee3cf" stroke-width="10" opacity=".65"/>
-      <path d="M136 80 Q157 95 159 145" fill="none" stroke="#8ee3cf" stroke-width="10" opacity=".65"/>
-      <path d="M98 170 Q110 185 122 170 L121 221 Q110 229 99 221 Z" fill="#a58cff" opacity=".50"/>
-    </svg>
-    <div class="tiny muted center">Фронт: ширина плеч + upper chest + V-taper</div>
-   </div>
-   <div>
-    <div id="muscleLegend" class="muscleLegend"></div>
-    <div class="note tiny" style="margin-top:8px">Это тренировочная карта приоритетов, а не анатомическая диагностика.</div>
-   </div>
-  </div>
- </div>
+ <div class="card"><h3>Карта приоритетов мышц</h3><p class="muted tiny">Цвет показывает акцент программы. Коснись группы, чтобы узнать цель.</p><div class="muscleMap"><div class="silhouette"><svg id="anatomy" viewBox="0 0 1048 864" role="img" aria-label="Карта мышц: вид спереди и сзади"><image href="assets/muscle-reference.jpeg" width="1048" height="864"/></svg></div><div class="muscleLegend">Приоритет <span>Низкий</span><span class="legendGradient"></span><span>Высокий</span></div><div id="muscleDetail" class="muscleDetail" aria-live="polite">Выберите группу мышц</div></div></div>
 </section>
 
 <section id="workout" class="panel">
@@ -151,24 +144,24 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
  <div class="card"><h2>Прогресс</h2><div class="grid4"><div class="metric"><span class="tiny muted">Вес</span><strong id="mWeight">—</strong></div><div class="metric"><span class="tiny muted">7-дн.</span><strong id="mAvg">—</strong></div><div class="metric"><span class="tiny muted">Темп</span><strong id="mRate">—</strong></div><div class="metric"><span class="tiny muted">Талия</span><strong id="mWaist">—</strong></div></div><div id="calorieAdvice" class="note tiny" style="margin-top:10px"></div></div>
  <div class="card"><h3>Вес тела</h3><canvas id="weightChart" width="900" height="280"></canvas></div>
  <div class="card"><h3>Талия</h3><canvas id="waistChart" width="900" height="280"></canvas></div>
- <div class="card"><h3>Estimated 1RM</h3><div id="e1rmList"></div></div>
+ <div class="card"><h3>Расчётный e1RM</h3><div id="e1rmList"></div></div>
  <div class="card"><h3>Лучшие подходы</h3><div id="prs"></div></div>
 </section>
 
 <section id="review" class="panel">
- <div class="card hero"><h2>Weekly Review</h2><div class="grid4">
+ <div class="card hero"><h2>Итоги недели</h2><div class="grid4">
   <div class="metric"><span class="tiny muted">Тренировки</span><strong id="wkSessions">0</strong><span class="unit">/4</span></div>
-  <div class="metric"><span class="tiny muted">Readiness</span><strong id="wkReady">—</strong></div>
+  <div class="metric"><span class="tiny muted">Готовность</span><strong id="wkReady">—</strong></div>
   <div class="metric"><span class="tiny muted">Сон</span><strong id="wkSleep">—</strong></div>
   <div class="metric"><span class="tiny muted">Вес</span><strong id="wkWeight">—</strong></div>
  </div></div>
  <div class="card"><h3>Прямой объём по мышцам</h3><div id="volumeReview"></div></div>
- <div class="card"><h3>Fatigue / deload</h3><div id="deloadBox" class="note tiny"></div></div>
+ <div class="card"><h3>Усталость и разгрузка</h3><div id="разгрузкиBox" class="note tiny"></div></div>
  <div class="card"><h3>Что делать на следующей неделе</h3><div id="weekAction" class="note tiny"></div></div>
 </section>
 
 <section id="body" class="panel">
- <div class="card"><h2>Утренний check-in</h2><div class="grid2"><div><label>Дата</label><input id="bodyDate" type="date"></div><div><label>Вес, кг</label><input id="bodyWeight" type="number" step=".1"></div></div><div class="grid3"><div><label>Талия, см</label><input id="waist" type="number" step=".1" placeholder="77"></div><div><label>Сон, ч</label><input id="sleep" type="number" step=".1" placeholder="8.5"></div><div><label>Шаги</label><input id="steps" type="number" placeholder="6800"></div></div><button class="btn primary" style="width:100%;margin-top:10px" onclick="saveBody()">Сохранить</button></div>
+ <div class="card"><h2>Утренние показатели</h2><div class="grid2"><div><label>Дата</label><input id="bodyDate" type="date"></div><div><label>Вес, кг</label><input id="bodyWeight" type="number" step=".1"></div></div><div class="grid3"><div><label>Талия, см</label><input id="waist" type="number" step=".1" placeholder="77"></div><div><label>Сон, ч</label><input id="sleep" type="number" step=".1" placeholder="8.5"></div><div><label>Шаги</label><input id="steps" type="number" placeholder="6800"></div></div><button class="btn primary" style="width:100%;margin-top:10px" onclick="saveBody()">Сохранить</button></div>
  <div class="card"><h3>Замеры (раз в 4 недели)</h3><div class="grid2"><div><label>Грудь</label><input id="chest" type="number" step=".1" value="94"></div><div><label>Бицепс напр.</label><input id="arm" type="number" step=".1" value="30"></div><div><label>Бедро</label><input id="thigh" type="number" step=".1" value="55"></div><div><label>Талия</label><input id="waistMonth" type="number" step=".1" value="77"></div></div><button class="btn" style="width:100%;margin-top:10px" onclick="saveMeasurements()">Сохранить замеры</button></div>
  <div class="card"><h3>Питание сегодня</h3><div class="grid2"><div><label>Ккал</label><input id="kcal" type="number" value="3000"></div><div><label>Белок, г</label><input id="protein" type="number" value="145"></div></div><label>Рацион</label><textarea id="foodNote" rows="4" placeholder="Завтрак → школа → после школы → ужин"></textarea><button class="btn" style="width:100%;margin-top:10px" onclick="saveFood()">Сохранить питание</button></div>
 </section>
@@ -177,7 +170,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
 <section id="school" class="panel">
  <div class="card hero">
   <div class="row">
-   <div style="flex:2"><span class="badge">School OS</span><h2 style="font-size:24px;margin-top:10px">ДЗ и контрольные</h2><p class="muted">Сейчас — ручной лог и JSON-import. Архитектура готова для автоматического eduVULCAN sync через приватный backend.</p></div>
+   <div style="flex:2"><span class="badge">Школа</span><h2 style="font-size:24px;margin-top:10px">ДЗ и контрольные</h2><p class="muted">Добавляйте задания и контрольные, чтобы видеть ближайшие сроки.</p></div>
    <div class="metric" style="max-width:160px"><span class="tiny muted">Ближайшее</span><strong id="schoolNext">—</strong></div>
   </div>
   <div id="schoolAdvice" class="note tiny"></div>
@@ -190,7 +183,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
    <div><label>Предмет</label><input id="schoolSubject" placeholder="Matematyka"></div>
    <div><label>Срок / дата</label><input id="schoolDue" type="date"></div>
   </div>
-  <label>Название / описание</label><textarea id="schoolTitle" rows="3" placeholder="Стр. 84, задания 1–6 / Sprawdzian dział 3"></textarea>
+  <label>Название / описание</label><textarea id="schoolTitle" rows="3" placeholder="Например: страница 84, задания 1–6"></textarea>
   <div class="grid2">
    <div><label>Важность</label><select id="schoolPriority"><option value="1">Обычная</option><option value="2">Важная</option><option value="3">Очень важная</option></select></div>
    <div><label>Источник</label><select id="schoolSource"><option value="manual">Ручное</option><option value="eduvulcan">eduVULCAN</option></select></div>
@@ -199,30 +192,39 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
  </div>
 
  <div class="card">
-  <div class="row"><h3 style="flex:3">Предстоящие</h3><button class="btn small" onclick="syncSchool()">↻ Sync</button></div>
+  <div class="row"><h3 style="flex:3">Предстоящие</h3><button class="btn small" onclick="syncSchool()">Синхронизировать</button></div>
   <div id="schoolUpcoming"></div>
  </div>
 
  <div class="card">
   <h3>Импорт школьных данных</h3>
-  <p class="tiny muted">Формат JSON: массив объектов с полями type, subject, title, due, priority. Это можно использовать до подключения eduVULCAN.</p>
-  <label class="btn" style="display:block;text-align:center;cursor:pointer">Импорт School JSON<input id="schoolImportFile" type="file" accept=".json" style="display:none"></label>
+  <p class="tiny muted">Формат JSON: массив объектов с полями type, subject, title, due, priority. </p>
+  <label class="btn" style="display:block;text-align:center;cursor:pointer">Импортировать школьный JSON<input id="schoolImportFile" type="file" accept=".json" style="display:none"></label>
  </div>
 </section>
 
 <section id="data" class="panel">
  <div class="card"><h2>Календарь</h2><div class="row"><button class="btn" onclick="shiftMonth(-1)">‹</button><h3 id="calTitle" class="center" style="flex:3;margin:auto"></h3><button class="btn" onclick="shiftMonth(1)">›</button></div><div id="calendarGrid" class="calendar"></div></div>
  <div class="card"><h3>История тренировок</h3><div id="history"></div></div>
- <div class="card"><h3>Резервная копия</h3><div class="row"><button class="btn" onclick="exportData()">Экспорт JSON</button><label class="btn center" style="cursor:pointer">Импорт JSON<input id="importFile" type="file" accept=".json" style="display:none"></label><button class="btn bad" onclick="resetAll()">Сбросить всё</button></div><p class="tiny muted">Экспорт раз в 1–2 недели. Данные хранятся локально на устройстве.</p></div>
- <div class="card"><h3>Установка на iPhone</h3><p class="tiny">Для полноценной PWA-установки папка должна быть на HTTPS. Открой сайт в Safari → Поделиться → «На экран Домой». После первого запуска приложение кэшируется и работает офлайн.</p></div>
+ <div class="card"><h3>Синхронизация</h3><p id="authState" class="muted">Синхронизация выключена. Войдите, чтобы сохранять данные в облаке и использовать их на других устройствах.</p><div id="dataSyncActions" class="syncActions"></div></div>
+ <div class="card"><h3>Резервная копия</h3><p class="muted">Сохраните копию данных на устройстве.</p><div class="syncActions"><button class="btn" onclick="exportData()">Скачать копию</button><label class="btn center" style="cursor:pointer;flex:1 1 160px">Восстановить из файла<input id="importFile" type="file" accept=".json" style="display:none"></label></div></div>
+ <div class="card dangerCard"><h3>Удалить локальные данные</h3><p>Данные в облаке останутся.</p><button class="btn bad" onclick="resetAll()">Удалить локальные данные</button></div>
+ <div class="card"><h3>Установка на iPhone</h3><p class="muted">В Safari откройте «Поделиться» → «На экран Домой».</p><button id="installBtn" class="btn hidden">Установить приложение</button></div>
 </section>
 </main>
 
-<div class="fixed"><div class="inner"><button class="btn" onclick="fillPrevious()">↶ Прошлая</button><button class="btn primary" onclick="saveSession()">Сохранить тренировку</button></div></div>
-
-<div id="settingsModal" class="modal"><div class="card"><div class="row"><h2 style="flex:3">Настройки</h2><button class="btn" onclick="closeSettings()">✕</button></div>
-<label>Профиль</label><input id="profileName"><div class="grid2"><div><label>Рост, см</label><input id="height" type="number"></div><div><label>Стартовый вес</label><input id="startWeight" type="number" step=".1"></div></div><div class="grid2"><div><label>Gojo %</label><input id="gojo" type="number"></div><div><label>Toji %</label><input id="toji" type="number"></div></div><label>Целевые ккал</label><input id="targetKcal" type="number"><label>School sync URL</label><input id="schoolSyncUrl" placeholder="/api/school/sync"><label>Life OS API token (если задан на Vercel)</label><input id="lifeApiToken" type="password" placeholder="необязательно"><button class="btn primary" style="width:100%;margin-top:10px" onclick="saveSettings()">Сохранить</button></div></div>
-
+<nav class="bottomNav" aria-label="Разделы">
+<button class="tab active" data-tab="today"><svg viewBox="0 0 24 24"><path d="M3 10 12 3l9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg>Сегодня</button>
+<button class="tab" data-tab="workout"><svg viewBox="0 0 24 24"><path d="M3 9v6m3-8v10m3-5h6m3-5v10m3-8v6"/></svg>Тренировка</button>
+<button class="tab" data-tab="body"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M7 22 9 13 6 9l6-2 6 2-3 4 2 9m-8-9h6"/></svg>Тело</button>
+<button class="tab" data-tab="school"><svg viewBox="0 0 24 24"><path d="M3 5c4-2 7-1 9 1 2-2 5-3 9-1v15c-4-2-7-1-9 1-2-2-5-3-9-1zM12 6v15"/></svg>Школа</button>
+<button class="tab" id="moreToggle" aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></svg>Ещё</button></nav>
+<div id="moreMenu" class="moreMenu"><button class="btn" data-tab="progress">Прогресс</button><button class="btn" data-tab="review">Неделя</button><button class="btn" data-tab="data">Данные</button><button class="btn" onclick="openSettings();closeMore()">Настройки</button></div>
+<div class="fixed" id="trainingAction"><div class="inner"><button class="btn primary" onclick="saveSession()">Сохранить тренировку</button></div></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="loginModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle"><div class="card loginSheet"><div class="modalHeader"><h2 id="loginTitle">Вход в Life OS</h2><button class="btn iconBtn" aria-label="Закрыть" onclick="closeLogin()">×</button></div><p class="muted">Войдите, чтобы синхронизировать данные между устройствами.</p><form id="loginForm"><label for="ownerPassword">Пароль</label><div class="passwordRow"><input id="ownerPassword" type="password" autocomplete="current-password" required><button class="btn" type="button" id="showPassword" aria-label="Показать пароль">Показать</button></div><div id="loginError" class="inlineError" role="alert"></div><button id="loginSubmit" class="btn primary" style="width:100%" type="submit">Войти</button></form></div></div>
+<div id="settingsModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="card"><div class="modalHeader"><h2 id="settingsTitle">Настройки</h2><button class="btn iconBtn" aria-label="Закрыть" onclick="closeSettings()">×</button></div><div class="settingsGroup"><h3>Профиль</h3><label>Имя</label><input id="profileName"><div class="grid2"><div><label>Рост, см</label><input id="height" type="number" inputmode="decimal"></div><div><label>Стартовый вес, кг</label><input id="startWeight" type="number" inputmode="decimal" step=".1"></div></div></div><div class="settingsGroup"><h3>Цели</h3><label>Целевые ккал</label><input id="targetKcal" type="number" inputmode="numeric"><div class="grid2"><div><label>Gojo %</label><input id="gojo" type="number" inputmode="numeric"></div><div><label>Toji %</label><input id="toji" type="number" inputmode="numeric"></div></div></div><div class="settingsGroup"><h3>Приложение</h3><label>Таймер отдыха, сек</label><input id="settingsTimer" type="number" inputmode="numeric" min="1"></div><div class="settingsGroup"><h3>Синхронизация</h3><p id="settingsSyncState" class="muted"></p><div id="settingsSyncActions" class="syncActions"></div></div><button class="btn primary" style="width:100%" onclick="saveSettings()">Сохранить настройки</button></div></div>
+<div id="historyModal" class="modal" role="dialog" aria-modal="true"><div class="card"><div class="modalHeader"><h2 id="historyTitle">История</h2><button class="btn iconBtn" onclick="historyModal.classList.remove('open')" aria-label="Закрыть">×</button></div><div id="historyContent" style="white-space:pre-line"></div></div></div>
 <div id="editorModal" class="modal"><div class="card"><div class="row"><h2 style="flex:3">Редактор программы</h2><button class="btn" onclick="closeEditor()">✕</button></div><div id="editorBody"></div><button class="btn primary" style="width:100%;margin-top:10px" onclick="saveEditor()">Сохранить программу</button></div></div>
 
 <script>
@@ -269,15 +271,15 @@ const DEFAULT_PLAN={
  ["Abs",2,"10–20",2.5,["Abs"]]
 ]};
 function safeJsonParse(raw){try{return raw?JSON.parse(raw):null}catch{return null}}
-const STORAGE_KEY="gt_life_v5_1";
+const STORAGE_KEY="gt_life_v6";
 let db=safeJsonParse(localStorage.getItem(STORAGE_KEY));
+if(!db)db=safeJsonParse(localStorage.getItem("gt_life_v5_1"));
+if(!db)db=safeJsonParse(localStorage.getItem("gt_life_v5"));
 if(!db)db=safeJsonParse(localStorage.getItem("gt_life_v4"));
 if(!db)db=safeJsonParse(localStorage.getItem("gt_training_v3"));
 const DEFAULT_DB={
- settings:{name:"SUBJECT-01",height:194,startWeight:76.4,gojo:70,toji:30,targetKcal:3000,schoolSyncUrl:"/api/school/sync",lifeApiToken:""},
- plan:structuredClone(DEFAULT_PLAN),sessions:[],body:[
- {date:"2026-09-03",weight:76.5},{date:"2026-09-04",weight:76.9},{date:"2026-09-06",weight:75.7},{date:"2026-09-11",weight:77},{date:"2026-09-16",weight:76.5},{date:"2026-09-23",weight:76}
- ],measurements:[{date:"2026-09-27",chest:94,arm:30,thigh:55,waist:77}],food:[],readiness:[],school:[],timetable:[]
+ settings:{name:"Мой профиль",height:"",startWeight:"",gojo:70,toji:30,targetKcal:"",restTimerSeconds:120},
+ plan:structuredClone(DEFAULT_PLAN),sessions:[],body:[],measurements:[],food:[],readiness:[],school:[],timetable:[]
 };
 function ensureDbShape(x){
  x=x&&typeof x==="object"?x:structuredClone(DEFAULT_DB);
@@ -292,8 +294,8 @@ function ensureDbShape(x){
  x.sessions.forEach(s=>(s.sets||[]).forEach(set=>{if(!Array.isArray(set.muscles)||set.muscles.length===0)set.muscles=muscleByExercise.get(set.exercise)||[]}));
  return x;
 }
-db=ensureDbShape(db||structuredClone(DEFAULT_DB));
-function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(db))}
+db=ensureDbShape(db||structuredClone(DEFAULT_DB));delete db.settings.lifeApiToken;
+function persist(){delete db.settings.lifeApiToken;LifeData.record(db);localStorage.setItem(STORAGE_KEY,JSON.stringify(db))}
 function localISODate(d=new Date()){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return `${y}-${m}-${day}`}
 function isoToday(){return localISODate()}
 function escHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
@@ -330,19 +332,19 @@ function prevForExercise(name){let out=[];db.sessions.forEach(s=>(s.sets||[]).fi
 function recommendation(name,range,step){
  let hist=prevForExercise(name);if(!hist.length)return null;let ld=hist.at(-1).date,last=hist.filter(x=>x.date===ld),[lo,hi]=parseRange(range),top=last.length&&last.every(x=>x.reps>=hi&&(x.rir==null||x.rir<=2)),base=Math.max(...last.map(x=>x.weight||0));return {weight:top?Math.round((base+step)*10)/10:base}
 }
-function fillRecommendations(){let day=db.plan[daySelect.value];[...document.querySelectorAll(".setrow")].forEach(r=>{let ins=r.querySelectorAll("input"),ei=+ins[0].dataset.e,ex=day[ei],rec=recommendation(ex[0],ex[2],ex[3]);if(rec&&!ins[0].value)ins[0].value=rec.weight});alert("Вес предложен по последней тренировке и правилу double progression.")}
-function fillPrevious(){let day=daySelect.value,prev=[...db.sessions].filter(s=>s.day===day).sort((a,b)=>a.date.localeCompare(b.date)||(a.id||0)-(b.id||0)).at(-1);if(!prev){alert("Прошлой тренировки этого дня ещё нет.");return}[...document.querySelectorAll(".setrow")].forEach((r,i)=>{let p=prev.sets[i];if(!p)return;let ins=r.querySelectorAll("input");ins[0].value=p.weight??"";ins[1].value=p.reps??"";ins[2].value=p.rir??""})}
-function gatherSession(){let day=daySelect.value,list=db.plan[day],sets=[];document.querySelectorAll(".setrow").forEach(r=>{let i=r.querySelectorAll("input"),ei=+i[0].dataset.e;sets.push({exercise:list[ei][0],muscles:list[ei][4]||[],set:+i[0].dataset.s+1,weight:+i[0].value||null,reps:+i[1].value||null,rir:+i[2].value||null,done:r.querySelector(".done").classList.contains("on")})});return{id:Date.now(),date:sessionDate.value||isoToday(),day,sets,duration:+duration.value||null,energy:+energy.value||null,postSoreness:+postSoreness.value||null,note:sessionNote.value.trim()}}
-function saveSession(){db.sessions.push(gatherSession());persist();refreshAll();alert("Тренировка сохранена.")}
-function showExerciseHistory(enc){let n=decodeURIComponent(enc),h=prevForExercise(n).slice(-14);alert(n+"\n\n"+(h.length?h.map(x=>`${x.date}: ${x.weight}×${x.reps}${x.rir!=null?` @${x.rir}RIR`:""}`).join("\n"):"Истории пока нет"))}
+function fillRecommendations(){let day=db.plan[daySelect.value];[...document.querySelectorAll(".setrow")].forEach(r=>{let ins=r.querySelectorAll("input"),ei=+ins[0].dataset.e,ex=day[ei],rec=recommendation(ex[0],ex[2],ex[3]);if(rec&&!ins[0].value)ins[0].value=rec.weight});toastMessage("Вес предложен по последней тренировке и правилу double progression.")}
+function fillPrevious(){let day=daySelect.value,prev=[...db.sessions].filter(s=>s.day===day).sort((a,b)=>a.date.localeCompare(b.date)||(a.id||0)-(b.id||0)).at(-1);if(!prev){toastMessage("Прошлой тренировки этого дня ещё нет.");return}[...document.querySelectorAll(".setrow")].forEach((r,i)=>{let p=prev.sets[i];if(!p)return;let ins=r.querySelectorAll("input");ins[0].value=p.weight??"";ins[1].value=p.reps??"";ins[2].value=p.rir??""})}
+function gatherSession(){let day=daySelect.value,list=db.plan[day],sets=[];document.querySelectorAll(".setrow").forEach(r=>{let i=r.querySelectorAll("input"),ei=+i[0].dataset.e;sets.push({exercise:list[ei][0],muscles:list[ei][4]||[],set:+i[0].dataset.s+1,weight:+i[0].value||null,reps:+i[1].value||null,rir:i[2].value===""?null:+i[2].value,done:r.querySelector(".done").classList.contains("on")})});return{id:Date.now(),date:sessionDate.value||isoToday(),day,sets,duration:+duration.value||null,energy:+energy.value||null,postSoreness:+postSoreness.value||null,note:sessionNote.value.trim()}}
+function saveSession(){db.sessions.push(gatherSession());persist();refreshAll();toastMessage("Тренировка сохранена.")}
+function showExerciseHistory(enc){let n=decodeURIComponent(enc),h=prevForExercise(n).slice(-14);historyTitle.textContent=n;historyContent.textContent=h.length?h.map(x=>`${x.date}: ${x.weight}×${x.reps}${x.rir!=null?` · ${x.rir} RIR`:""}`).join("\n"):"Истории пока нет";historyModal.classList.add("open")}
 
 let timerSec=120,timerLeft=120,timerInt=null;
 function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
-function setTimer(s){timerSec=timerLeft=s;timerText.textContent=fmt(s);clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт"}
-function toggleTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт";return}timerToggle.textContent="Пауза";timerInt=setInterval(()=>{timerLeft--;timerText.textContent=fmt(timerLeft);if(timerLeft<=0){clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт";navigator.vibrate?.([150,100,150]);alert("Отдых закончен");timerLeft=timerSec;timerText.textContent=fmt(timerLeft)}},1000)}
+function setTimer(s,save=true){db.settings.restTimerSeconds=s;if(save)persist();timerSec=timerLeft=s;timerText.textContent=fmt(s);clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт"}
+function toggleTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт";return}timerToggle.textContent="Пауза";timerInt=setInterval(()=>{timerLeft--;timerText.textContent=fmt(timerLeft);if(timerLeft<=0){clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт";navigator.vibrate?.([150,100,150]);toastMessage("Отдых закончен");timerLeft=timerSec;timerText.textContent=fmt(timerLeft)}},1000)}
 function startTimerAuto(){timerLeft=timerSec;timerText.textContent=fmt(timerLeft);if(timerInt)clearInterval(timerInt);timerInt=null;toggleTimer()}
 
-function saveReadiness(){let e={date:isoToday(),sleep:+quickSleep.value||null,energy:+quickEnergy.value||null,soreness:+quickSoreness.value||0,stress:+quickStress.value||0,wrist:+quickWrist.value||0};db.readiness=db.readiness.filter(x=>x.date!==e.date);db.readiness.push(e);persist();renderToday();renderWeekly();alert("Readiness сохранён.")}
+function saveГотовность(){let e={date:isoToday(),sleep:+quickSleep.value||null,energy:+quickEnergy.value||null,soreness:+quickSoreness.value||0,stress:+quickStress.value||0,wrist:+quickWrist.value||0};db.readiness=db.readiness.filter(x=>x.date!==e.date);db.readiness.push(e);persist();renderToday();renderWeekly();toastMessage("Самочувствие сохранено.")}
 function readinessScore(r){
  if(!r)return null;let s=100;
  if(r.sleep!=null)s-=Math.max(0,8-r.sleep)*8;
@@ -376,7 +378,7 @@ function renderToday(){
  todayTitle.textContent=sched?sched:"День восстановления";
  todaySub.textContent=sched?"Плановая тренировка сегодня.":"Следующая: "+(next?new Intl.DateTimeFormat("ru",{weekday:"long",day:"numeric",month:"short"}).format(next.date)+" · "+next.day:"—");
  readyScore.textContent=score==null?"—":score; const schoolLoad=renderTodaySchool();
- let adv="Заполни быстрый check-in, чтобы получить readiness.";
+ let adv="Заполни быстрый показатели, чтобы получить readiness.";
  if(score!=null){if(score>=80)adv="Высокая готовность: выполняй план как обычно.";else if(score>=65)adv="Нормальная готовность: план без изменений, но не форсируй отказ.";else if(score>=50)adv="Умеренная усталость: оставь веса, убери 1 изоляционный сет с 1–2 мышц.";else adv="Низкая готовность: разумно сделать лёгкий день или перенос, особенно если это повторяется."}
  if(schoolLoad>=7 && score!=null && score>=65) adv += " Учебная нагрузка высокая: тренировку можно оставить, но не добавляй необязательный объём.";
  if(schoolLoad>=7 && score!=null && score<65) adv += " Высокая учебная нагрузка + невысокая готовность: лучше сократить необязательные сеты.";
@@ -384,11 +386,11 @@ function renderToday(){
  dashWeight.textContent=last?.weight?last.weight.toFixed(1)+" кг":"—";dashAvg.textContent=a7?a7.toFixed(2):"—";dashSleep.textContent=sleepVals.length?avg(sleepVals).toFixed(1)+" ч":"—";dashSteps.textContent=stepVals.length?Math.round(avg(stepVals)).toLocaleString("ru"):"—";
  renderMuscles()
 }
-function renderMuscles(){let arr=Object.entries(MUSCLE_PRIORITY).sort((a,b)=>b[1]-a[1]);muscleLegend.innerHTML=arr.map(([m,v])=>`<div class="muscleItem"><b>${m}</b><div class="bar"><span style="width:${v}%"></span></div></div>`).join("")}
+function renderMuscles(){renderAnatomy()}
 
-function saveBody(){const date=bodyDate.value||isoToday(),old=db.body.find(x=>x.date===date)||{};let e={...old,date,weight:bodyWeight.value!==""?+bodyWeight.value:(old.weight??null),waist:waist.value!==""?+waist.value:(old.waist??null),sleep:sleep.value!==""?+sleep.value:(old.sleep??null),steps:steps.value!==""?+steps.value:(old.steps??null)};db.body=db.body.filter(x=>x.date!==date);db.body.push(e);db.body.sort((a,b)=>a.date.localeCompare(b.date));persist();refreshAll();alert("Check-in сохранён.")}
-function saveMeasurements(){const date=isoToday(),old=db.measurements.find(x=>x.date===date)||{};const e={...old,date,chest:chest.value!==""?+chest.value:(old.chest??null),arm:arm.value!==""?+arm.value:(old.arm??null),thigh:thigh.value!==""?+thigh.value:(old.thigh??null),waist:waistMonth.value!==""?+waistMonth.value:(old.waist??null)};db.measurements=db.measurements.filter(x=>x.date!==date);db.measurements.push(e);persist();refreshAll();alert("Замеры сохранены.")}
-function saveFood(){db.food=db.food.filter(x=>x.date!==isoToday());db.food.push({date:isoToday(),kcal:+kcal.value||null,protein:+protein.value||null,note:foodNote.value.trim()});persist();alert("Питание сохранено.")}
+function saveBody(){const date=bodyDate.value||isoToday(),old=db.body.find(x=>x.date===date)||{};let e={...old,date,weight:bodyWeight.value!==""?+bodyWeight.value:(old.weight??null),waist:waist.value!==""?+waist.value:(old.waist??null),sleep:sleep.value!==""?+sleep.value:(old.sleep??null),steps:steps.value!==""?+steps.value:(old.steps??null)};db.body=db.body.filter(x=>x.date!==date);db.body.push(e);db.body.sort((a,b)=>a.date.localeCompare(b.date));persist();refreshAll();toastMessage("Показатели сохранены.")}
+function saveMeasurements(){const date=isoToday(),old=db.measurements.find(x=>x.date===date)||{};const e={...old,date,chest:chest.value!==""?+chest.value:(old.chest??null),arm:arm.value!==""?+arm.value:(old.arm??null),thigh:thigh.value!==""?+thigh.value:(old.thigh??null),waist:waistMonth.value!==""?+waistMonth.value:(old.waist??null)};db.measurements=db.measurements.filter(x=>x.date!==date);db.measurements.push(e);persist();refreshAll();toastMessage("Замеры сохранены.")}
+function saveFood(){db.food=db.food.filter(x=>x.date!==isoToday());db.food.push({date:isoToday(),kcal:+kcal.value||null,protein:+protein.value||null,note:foodNote.value.trim()});persist();toastMessage("Питание сохранено.")}
 
 const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
 function weightStats(){let b=db.body.filter(x=>x.weight).sort((a,b)=>a.date.localeCompare(b.date)),a7=avg(b.slice(-7).map(x=>x.weight)),p7=avg(b.slice(-14,-7).map(x=>x.weight));return{b,last:b.at(-1)?.weight,a7,p7,rate:a7!=null&&p7!=null?a7-p7:null}}
@@ -412,10 +414,10 @@ function renderWeekly(){
  let avgReady=rScores.length?avg(rScores):null,avgEnergy=sess.length?avg(sess.map(x=>x.energy||7)):null,avgSore=sess.length?avg(sess.map(x=>x.postSoreness||0)):null,signals=0;
  if(avgReady!=null&&avgReady<60)signals++;if(avgEnergy!=null&&avgEnergy<6)signals++;if(avgSore!=null&&avgSore>6)signals++;
  let lowCount=rScores.filter(x=>x<55).length;if(lowCount>=2)signals++;
- let dtext="Признаков необходимости deload пока недостаточно. Продолжай обычную прогрессию.";
+ let dtext="Признаков необходимости разгрузки пока недостаточно. Продолжай обычную прогрессию.";
  if(signals>=2)dtext="Есть несколько признаков накопленной усталости. На следующей неделе разумно снизить рабочие сеты примерно на 30–40% и оставить 3–4 RIR на 5–7 дней.";
- else if(signals===1)dtext="Есть один сигнал усталости. Пока не deload: не добавляй объём и следи за readiness/силой ещё 3–4 дня.";
- deloadBox.textContent=dtext;
+ else if(signals===1)dtext="Есть один сигнал усталости. Пока не разгрузки: не добавляй объём и следи за readiness/силой ещё 3–4 дня.";
+ разгрузкиBox.textContent=dtext;
  let st=weightStats(),action=[];
  if(sess.length<4)action.push("Не добрана частота 4×/нед — сначала восстанови регулярность, а не добавляй объём.");
  if(st.rate!=null&&st.rate<.10)action.push("Если медленный набор держится вторую неделю — +150 ккал/сут.");
@@ -429,7 +431,7 @@ function renderWeekly(){
 let calCursor=new Date();
 function shiftMonth(n){calCursor.setMonth(calCursor.getMonth()+n);renderCalendar()}
 function renderCalendar(){let y=calCursor.getFullYear(),m=calCursor.getMonth();calTitle.textContent=new Intl.DateTimeFormat("ru",{month:"long",year:"numeric"}).format(calCursor);let names=["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];calendarGrid.innerHTML=names.map(x=>`<div class="calHead">${x}</div>`).join("");let first=new Date(y,m,1),off=(first.getDay()+6)%7,days=new Date(y,m+1,0).getDate();for(let i=0;i<off;i++)calendarGrid.innerHTML+="<div></div>";for(let d=1;d<=days;d++){let iso=`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`,ss=db.sessions.filter(s=>s.date===iso),bb=db.body.find(x=>x.date===iso);calendarGrid.innerHTML+=`<div class="day ${iso===isoToday()?"today":""}"><b>${d}</b>${ss.map(s=>`<div><span class="dot"></span>${s.day.split("—")[0]}</div>`).join("")}${bb?.weight?`<div class="tiny muted">${bb.weight} кг</div>`:""}</div>`}}
-function renderHistory(){let a=[...db.sessions].reverse();history.innerHTML=a.length?a.slice(0,50).map(s=>`<div class="metric" style="margin:7px 0"><b>${escHtml(s.date)} · ${escHtml(s.day)}</b><div class="tiny muted">${s.sets.filter(x=>x.done).length}/${s.sets.length} сетов · ${s.duration||"—"} мин · энергия ${s.energy||"—"}/10</div>${s.note?`<div class="tiny">${escHtml(s.note)}</div>`:""}</div>`).join(""):"Пока пусто."}
+function renderHistory(){let a=[...db.sessions].reverse();document.getElementById("history").innerHTML=a.length?a.slice(0,50).map(s=>`<div class="metric" style="margin:7px 0"><b>${escHtml(s.date)} · ${escHtml(s.day)}</b><div class="tiny muted">${s.sets.filter(x=>x.done).length}/${s.sets.length} сетов · ${s.duration||"—"} мин · энергия ${s.energy||"—"}/10</div>${s.note?`<div class="tiny">${escHtml(s.note)}</div>`:""}</div>`).join(""):"Пока пусто."}
 
 
 function schoolDaysUntil(due){
@@ -440,73 +442,165 @@ function schoolDaysUntil(due){
 function schoolTypeLabel(t){return t==="homework"?"ДЗ":t==="exam"?"Контрольная":t==="quiz"?"Kartkówka":"Событие"}
 function saveSchoolItem(){
  const item={id:Date.now().toString(),type:schoolType.value,subject:schoolSubject.value.trim()||"Без предмета",title:schoolTitle.value.trim()||"Без описания",due:schoolDue.value||isoToday(),priority:+schoolPriority.value||1,source:schoolSource.value||"manual",done:false,updatedAt:new Date().toISOString()};
- db.school=db.school||[];db.school.push(item);persist();renderSchool();
- schoolTitle.value="";alert("Школьное событие добавлено.");
+ db.school=db.school||[];db.school.push(item);persist();renderSchool();renderToday();
+ schoolTitle.value="";toastMessage("Школьное событие добавлено.");
 }
 function toggleSchool(id){
- const x=(db.school||[]).find(i=>i.id===id);if(!x)return;x.done=!x.done;persist();renderSchool()
+ const x=(db.school||[]).find(i=>i.id===id);if(!x)return;x.done=!x.done;persist();renderSchool();renderToday()
 }
 function deleteSchool(id){
- if(!confirm("Удалить событие?"))return;db.school=(db.school||[]).filter(i=>i.id!==id);persist();renderSchool()
+ if(!confirm("Удалить событие?"))return;const item=(db.school||[]).find(i=>i.id===id);if(item){db.deletedSchool??=[];db.deletedSchool.push({...item,deletedAt:new Date().toISOString()})}db.school=(db.school||[]).filter(i=>i.id!==id);persist();renderSchool();renderToday()
 }
 function renderSchool(){
  db.school=db.school||[];
  const upcoming=db.school.filter(x=>x.type!=="lesson"&&!x.done).sort((a,b)=>a.due.localeCompare(b.due)||b.priority-a.priority);
- if(!upcoming.length){schoolUpcoming.innerHTML='<div class="muted tiny">Пока нет предстоящих задач.</div>';schoolNext.textContent="—";schoolAdvice.textContent="Добавь ДЗ/контрольные вручную или подключи eduVULCAN sync.";return}
+ if(!upcoming.length){schoolUpcoming.innerHTML='<div class="muted tiny">Пока нет предстоящих задач.</div>';schoolNext.textContent="—";schoolAdvice.textContent="Добавь ДЗ/контрольные вручную или подключи синхронизацию eduVULCAN.";return}
  const first=upcoming[0],days=schoolDaysUntil(first.due);
  schoolNext.textContent=days==null?"—":days<0?"просрочено":days===0?"сегодня":days===1?"завтра":days+" дн.";
  schoolAdvice.textContent=days!=null&&days<=1?`Ближайшее: ${first.subject} — ${first.title}`:`Предстоящих задач: ${upcoming.length}.`;
  schoolUpcoming.innerHTML=upcoming.map(x=>{let d=schoolDaysUntil(x.due),cls=d!=null&&d<=1?"bad":d!=null&&d<=3?"warn":"good";return `<div class="metric" style="margin:7px 0">
-   <div class="row"><div style="flex:3"><b>${escHtml(schoolTypeLabel(x.type))} · ${escHtml(x.subject)}</b><div class="tiny">${escHtml(x.title)}</div><div class="tiny muted">${escHtml(x.due)} · ${escHtml(x.source==="eduvulcan"?"eduVULCAN":"manual")}</div></div>
+   <div class="row"><div style="flex:3"><b>${escHtml(schoolTypeLabel(x.type))} · ${escHtml(x.subject)}</b><div class="tiny">${escHtml(x.title)}</div><div class="tiny muted">${escHtml(x.due)} · ${escHtml(x.source==="eduvulcan"?"eduVULCAN":"вручную")}</div></div>
    <div style="max-width:130px"><span class="badge ${cls}">${d<0?"просрочено":d===0?"сегодня":d===1?"завтра":d+" дн."}</span></div></div>
-   <div class="row" style="margin-top:7px"><button class="btn small good" onclick="toggleSchool('${x.id}')">✓ Готово</button><button class="btn small bad" onclick="deleteSchool('${x.id}')">Удалить</button></div>
+   <div class="row" style="margin-top:7px"><button class="btn small good" onclick="toggleSchool('${escAttr(x.id)}')">✓ Готово</button><button class="btn small bad" onclick="deleteSchool('${escAttr(x.id)}')">Удалить</button></div>
   </div>`}).join("")
 }
 async function syncSchool(){
- const url=(db.settings&&db.settings.schoolSyncUrl)||"/api/school/sync";
- try{
-  const headers={"Accept":"application/json"};if(db.settings?.lifeApiToken)headers["Authorization"]="Bearer "+db.settings.lifeApiToken;
-  const r=await fetch(url,{credentials:"include",headers});if(!r.ok){let msg="HTTP "+r.status;try{const j=await r.json();msg=j.message||j.error||msg}catch{}throw new Error(msg)}
-  const payload=await r.json(),items=Array.isArray(payload)?payload:(payload.items||[]),lessons=payload.lessons||[];
-  const manual=(db.school||[]).filter(x=>!x.externalId||x.source==="manual");
-  const doneSynced=(db.school||[]).filter(x=>x.externalId&&x.source!=="manual"&&x.done);
-  const oldMap=new Map((db.school||[]).filter(x=>x.externalId).map(x=>[x.externalId,x]));
-  const synced=items.filter(i=>i.type!=="lesson").map(i=>{const key=i.externalId||[i.type,i.subject,i.due,i.title].join("|"),old=oldMap.get(key);return{id:old?.id||stableClientId(key),externalId:key,type:i.type||"homework",subject:i.subject||"Без предмета",title:i.title||"",due:i.due||isoToday(),priority:i.priority||1,source:i.source||"eduvulcan",done:old?.done||false,updatedAt:new Date().toISOString()}});
-  const doneIds=new Set(doneSynced.map(x=>x.externalId));db.school=[...manual,...doneSynced,...synced.filter(x=>!doneIds.has(x.externalId))];
-  db.timetable=lessons.map(i=>({...i,id:stableClientId(i.externalId||[i.subject,i.due,i.title].join("|"))}));
-  persist();localStorage.setItem("gt_school_sync_at_v5_1",String(Date.now()));renderSchool();renderToday();alert("School sync завершён.");
- }catch(e){alert("School sync не удался: "+e.message)}
+ if(!LifeData.user){toastMessage("Войдите для синхронизации школы.");return}
+ try{const token=await LifeData.token();const r=await fetch("/api/school/sync",{headers:{Authorization:"Bearer "+token},cache:"no-store"});const j=await r.json();if(!r.ok)throw new Error(j.message||j.error||"HTTP "+r.status);await LifeData.sync();toastMessage("Школьные данные синхронизированы.")}
+ catch(e){toastMessage("Синхронизация школы: "+e.message)}
 }
+async function signInToSync(){openLogin()}
+async function signOutOfSync(){try{await LifeData.signOut();toastMessage("Вы вышли")}catch(e){toastMessage("Не удалось выйти")}}
+function openSettings(){settingsModal.classList.add("open");profileName.value=db.settings.name;height.value=db.settings.height;startWeight.value=db.settings.startWeight;gojo.value=db.settings.gojo;toji.value=db.settings.toji;targetKcal.value=db.settings.targetKcal;settingsTimer.value=db.settings.restTimerSeconds||120;renderSyncActions()}
+function closeSettings(){settingsModal.classList.remove("open")}
+function saveSettings(){db.settings={...db.settings,name:profileName.value,height:+height.value,startWeight:+startWeight.value,gojo:+gojo.value,toji:+toji.value,targetKcal:+targetKcal.value,restTimerSeconds:+settingsTimer.value||120};persist();setTimer(db.settings.restTimerSeconds,false);closeSettings();refreshAll();toastMessage("Настройки сохранены")}
+function openEditor(){editorModal.classList.add("open");editorBody.innerHTML="";Object.entries(db.plan).forEach(([day,exs],di)=>{let s=document.createElement("div");s.innerHTML=`<h3>${day}</h3>`;exs.forEach((e,ei)=>{s.innerHTML+=`<div class="grid3" style="margin:6px 0"><input data-ed="${di}" data-ee="${ei}" data-k="0" value="${escAttr(e[0])}"><input data-ed="${di}" data-ee="${ei}" data-k="1" type="number" value="${e[1]}"><input data-ed="${di}" data-ee="${ei}" data-k="2" value="${escAttr(e[2])}"></div>`});editorBody.appendChild(s)})}
+function closeEditor(){editorModal.classList.remove("open")}
+function saveEditor(){let keys=Object.keys(db.plan),p=structuredClone(db.plan);editorBody.querySelectorAll("input").forEach(i=>{let d=+i.dataset.ed,e=+i.dataset.ee,k=+i.dataset.k;p[keys[d]][e][k]=k===1?+i.value:i.value});db.plan=p;persist();closeEditor();initDays();refreshAll();toastMessage("Программа обновлена.")}
 
-function openSettings(){settingsModal.style.display="block";profileName.value=db.settings.name;height.value=db.settings.height;startWeight.value=db.settings.startWeight;gojo.value=db.settings.gojo;toji.value=db.settings.toji;targetKcal.value=db.settings.targetKcal;schoolSyncUrl.value=db.settings.schoolSyncUrl||"/api/school/sync";lifeApiToken.value=db.settings.lifeApiToken||""}
-function closeSettings(){settingsModal.style.display="none"}
-function saveSettings(){db.settings={...db.settings,name:profileName.value,height:+height.value,startWeight:+startWeight.value,gojo:+gojo.value,toji:+toji.value,targetKcal:+targetKcal.value,schoolSyncUrl:schoolSyncUrl.value.trim()||"/api/school/sync",lifeApiToken:lifeApiToken.value.trim()};persist();closeSettings();refreshAll()}
-function openEditor(){editorModal.style.display="block";editorBody.innerHTML="";Object.entries(db.plan).forEach(([day,exs],di)=>{let s=document.createElement("div");s.innerHTML=`<h3>${day}</h3>`;exs.forEach((e,ei)=>{s.innerHTML+=`<div class="grid3" style="margin:6px 0"><input data-ed="${di}" data-ee="${ei}" data-k="0" value="${escAttr(e[0])}"><input data-ed="${di}" data-ee="${ei}" data-k="1" type="number" value="${e[1]}"><input data-ed="${di}" data-ee="${ei}" data-k="2" value="${escAttr(e[2])}"></div>`});editorBody.appendChild(s)})}
-function closeEditor(){editorModal.style.display="none"}
-function saveEditor(){let keys=Object.keys(db.plan),p=structuredClone(db.plan);editorBody.querySelectorAll("input").forEach(i=>{let d=+i.dataset.ed,e=+i.dataset.ee,k=+i.dataset.k;p[keys[d]][e][k]=k===1?+i.value:i.value});db.plan=p;persist();closeEditor();initDays();refreshAll();alert("Программа обновлена.")}
+function exportData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`GT_Life_OS_v6_backup_${isoToday()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+schoolImportFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let items=JSON.parse(r.result);if(!Array.isArray(items))items=items.items||[];db.school=db.school||[];const seen=new Set(db.school.map(x=>x.externalId||[x.type,x.subject,x.due,x.title].join("|")));items.filter(i=>i.type!=="lesson").forEach(i=>{const key=i.externalId||[i.type||"homework",i.subject||"",i.due||"",i.title||""].join("|");if(!seen.has(key)){db.school.push({id:i.id||stableClientId(key),externalId:i.externalId||null,type:i.type||"homework",subject:i.subject||"Без предмета",title:i.title||"",due:i.due||isoToday(),priority:+i.priority||1,source:i.source||"manual",done:!!i.done});seen.add(key)}});persist();renderSchool();toastMessage("Школьные данные импортированы.")}catch{toastMessage("Не удалось импортировать школьные данные")}};r.readAsText(f)}
+importFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=ensureDbShape(JSON.parse(r.result));delete db.settings.lifeApiToken;persist();location.reload()}catch{toastMessage("Не удалось импортировать JSON")}};r.readAsText(f)}
+async function resetAll(){if(confirm("Удалить локальную копию? Облачные данные останутся доступными.")){await LifeData.clearLocal();localStorage.removeItem(STORAGE_KEY);location.reload()}}
 
-function exportData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`GT_Life_OS_v5_1_backup_${isoToday()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-schoolImportFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let items=JSON.parse(r.result);if(!Array.isArray(items))items=items.items||[];db.school=db.school||[];const seen=new Set(db.school.map(x=>x.externalId||[x.type,x.subject,x.due,x.title].join("|")));items.filter(i=>i.type!=="lesson").forEach(i=>{const key=i.externalId||[i.type||"homework",i.subject||"",i.due||"",i.title||""].join("|");if(!seen.has(key)){db.school.push({id:i.id||stableClientId(key),externalId:i.externalId||null,type:i.type||"homework",subject:i.subject||"Без предмета",title:i.title||"",due:i.due||isoToday(),priority:+i.priority||1,source:i.source||"manual",done:!!i.done});seen.add(key)}});persist();renderSchool();alert("School JSON импортирован.")}catch{alert("Не удалось импортировать School JSON")}};r.readAsText(f)}
-importFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=ensureDbShape(JSON.parse(r.result));persist();location.reload()}catch{alert("Не удалось импортировать JSON")}};r.readAsText(f)}
-function resetAll(){if(confirm("Удалить все локальные данные?")){localStorage.removeItem(STORAGE_KEY);location.reload()}}
+function activateTab(name){document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===name||(x.id==="moreToggle"&&["progress","review","data"].includes(name))));document.querySelectorAll(".panel").forEach(x=>x.classList.toggle("active",x.id===name));trainingAction.classList.toggle("visible",name==="workout");closeMore();window.scrollTo(0,0);if(name==="progress")refreshProgress();if(name==="review")renderWeekly();if(name==="school")renderSchool();if(name==="data"){renderCalendar();renderHistory()}}
+document.querySelectorAll(".tab[data-tab],#moreMenu [data-tab]").forEach(t=>t.onclick=()=>activateTab(t.dataset.tab));
+moreToggle.onclick=()=>{let open=moreMenu.classList.toggle("open");moreToggle.setAttribute("aria-expanded",String(open))};
+function closeMore(){moreMenu.classList.remove("open");moreToggle.setAttribute("aria-expanded","false")}
+let deferredPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBtn.classList.remove("hidden")});installBtn.onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.classList.add("hidden")}}
 
-document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));t.classList.add("active");document.getElementById(t.dataset.tab).classList.add("active");if(t.dataset.tab==="progress")refreshProgress();if(t.dataset.tab==="review")renderWeekly();if(t.dataset.tab==="school")renderSchool();if(t.dataset.tab==="data"){renderCalendar();renderHistory()}})
-let deferredPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display="block"});installBtn.onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.style.display="none"}}
-
-async function autoSchoolSync(){
- try{
-  const last=Number(localStorage.getItem("gt_school_sync_at_v5_1")||0);if(Date.now()-last<30*60*1000)return;
-  const url=(db.settings&&db.settings.schoolSyncUrl)||"/api/school/sync",headers={"Accept":"application/json"};if(db.settings?.lifeApiToken)headers["Authorization"]="Bearer "+db.settings.lifeApiToken;
-  const r=await fetch(url,{headers});if(!r.ok)return;const payload=await r.json(),items=Array.isArray(payload)?payload:(payload.items||[]),lessons=payload.lessons||[];
-  const manual=(db.school||[]).filter(x=>!x.externalId||x.source==="manual"),doneSynced=(db.school||[]).filter(x=>x.externalId&&x.source!=="manual"&&x.done),oldMap=new Map((db.school||[]).filter(x=>x.externalId).map(x=>[x.externalId,x]));
-  const synced=items.filter(i=>i.type!=="lesson").map(i=>{const key=i.externalId||[i.type,i.subject,i.due,i.title].join("|"),old=oldMap.get(key);return{id:old?.id||stableClientId(key),externalId:key,type:i.type||"homework",subject:i.subject||"Без предмета",title:i.title||"",due:i.due||isoToday(),priority:i.priority||1,source:i.source||"eduvulcan",done:old?.done||false,updatedAt:new Date().toISOString()}});
-  const doneIds=new Set(doneSynced.map(x=>x.externalId));db.school=[...manual,...doneSynced,...synced.filter(x=>!doneIds.has(x.externalId))];db.timetable=lessons.map(i=>({...i,id:stableClientId(i.externalId||[i.subject,i.due,i.title].join("|"))}));persist();localStorage.setItem("gt_school_sync_at_v5_1",String(Date.now()));renderSchool();renderToday();
- }catch{}
-}
+async function autoSchoolSync(){if(LifeData.user)await LifeData.sync()}
 
 function refreshAll(){renderToday();refreshProgress();renderWeekly();renderCalendar();renderHistory();renderSchool()}
 if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
-initDays();refreshAll();autoSchoolSync();
+
+let toastTimer;
+function toastMessage(message){const el=document.getElementById('toast');el.textContent=String(message).replaceAll('\n',' · ').slice(0,180);el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3600)}
+const loginEls={
+ modal:document.getElementById('loginModal'),
+ form:document.getElementById('loginForm'),
+ password:document.getElementById('ownerPassword'),
+ show:document.getElementById('showPassword'),
+ error:document.getElementById('loginError'),
+ submit:document.getElementById('loginSubmit')
+};
+function openLogin(){
+ closeSettings();closeMore();
+ loginEls.error.textContent='';
+ loginEls.password.value='';
+ loginEls.modal.classList.add('open');
+ setTimeout(()=>loginEls.password.focus(),180)
+}
+function closeLogin(){
+ loginEls.modal.classList.remove('open');
+ loginEls.password.value='';
+ loginEls.error.textContent=''
+}
+loginEls.show.addEventListener('click',()=>{
+ const visible=loginEls.password.type==='text';
+ loginEls.password.type=visible?'password':'text';
+ loginEls.show.textContent=visible?'Показать':'Скрыть';
+ loginEls.show.setAttribute('aria-label',visible?'Показать пароль':'Скрыть пароль')
+});
+loginEls.form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const password=loginEls.password.value;
+ loginEls.error.textContent='';
+ if(!password){
+   loginEls.error.textContent='Введите пароль';
+   loginEls.password.focus();
+   return
+ }
+ loginEls.submit.disabled=true;
+ loginEls.submit.textContent='Входим…';
+ try{
+   const signedUser=await LifeData.signIn(password);
+   if(!signedUser)throw new Error('AUTH_NO_USER');
+   closeLogin();
+   renderSyncActions();
+   toastMessage('Синхронизация включена')
+ }catch(error){
+   console.error('Life OS login',error);
+   const message=String(error?.message||'');
+   loginEls.error.textContent=
+     !navigator.onLine||/fetch|network|connection|timeout/i.test(message)
+       ?'Нет соединения'
+       :/invalid|credentials|password|grant/i.test(message)
+         ?'Неверный пароль'
+         :'Не удалось войти';
+   loginEls.password.focus();
+   loginEls.password.select()
+ }finally{
+   loginEls.submit.disabled=false;
+   loginEls.submit.textContent='Войти'
+ }
+});
+function renderSyncActions(){
+ const signedIn=!!LifeData.user;
+ const headerLoginEl=document.getElementById('headerLogin');
+ const dataActionsEl=document.getElementById('dataSyncActions');
+ const settingsActionsEl=document.getElementById('settingsSyncActions');
+ const settingsStateEl=document.getElementById('settingsSyncState');
+ headerLoginEl?.classList.toggle('hidden',signedIn);
+ const content=signedIn
+   ?'<button class="btn primary" onclick="syncNow()">Синхронизировать сейчас</button><button class="btn" onclick="signOutOfSync()">Выйти</button>'
+   :'<button class="btn primary" onclick="openLogin()">Войти</button>';
+ if(dataActionsEl)dataActionsEl.innerHTML=content;
+ if(settingsActionsEl)settingsActionsEl.innerHTML=content;
+ if(settingsStateEl)settingsStateEl.textContent=signedIn
+   ?'Синхронизация включена. Все изменения сохраняются автоматически.'
+   :'Синхронизация выключена.'
+}
+async function syncNow(){if(!navigator.onLine){toastMessage('Нет соединения');return}await LifeData.sync();toastMessage('Синхронизация запущена')}
+document.addEventListener('life-auth-change',renderSyncActions);renderSyncActions();
+for(const id of ['loginModal','settingsModal','editorModal','historyModal']){const modal=document.getElementById(id);if(modal)modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('open');modal.style.display='';}})}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLogin();closeSettings();closeEditor();closeMore()}});
+const MUSCLE_NAMES={Chest:'Грудные',SideDelts:'Средние дельты',FrontDelts:'Передние дельты',RearDelts:'Задние дельты',Biceps:'Бицепс',Triceps:'Трицепс',Abs:'Пресс',Obliques:'Косые мышцы',Quads:'Квадрицепс',Calves:'Икры',Traps:'Трапеции',UpperBack:'Верх спины',Lats:'Широчайшие',LowerBack:'Поясница',Glutes:'Ягодичные',Hamstrings:'Задняя поверхность бедра'};
+// Polygon positions follow the supplied front/back anatomy reference; the source image is local.
+const MUSCLE_ZONES=[
+['Chest','front','167,188 180,171 243,166 260,190 258,239 223,252 192,236 161,231'],['Chest','front','266,190 282,166 346,171 362,190 367,231 338,242 299,253 267,239'],
+['FrontDelts','front','153,179 176,166 201,170 166,222 148,232'],['FrontDelts','front','328,170 354,165 378,182 381,232 362,218'],
+['SideDelts','front','147,228 163,212 178,224 180,275 166,310 145,307 133,283'],['SideDelts','front','362,223 377,211 394,233 398,286 381,313 360,302'],
+['Biceps','front','153,240 177,240 181,278 169,309 153,312'],['Biceps','front','366,240 384,238 395,277 389,306 372,309'],
+['Triceps','front','134,263 147,239 154,248 147,305 139,319 132,297'],['Triceps','front','397,244 407,267 413,297 403,320 391,303'],
+['Abs','front','232,266 257,253 260,378 238,380 224,343 223,280'],['Abs','front','265,255 291,268 303,284 302,342 286,380 266,378'],
+['Obliques','front','203,266 223,287 228,355 251,413 217,383 196,335'],['Obliques','front','303,281 323,267 331,337 308,388 277,411 297,355'],
+['Quads','front','197,423 230,426 249,457 247,573 219,612 190,554'],['Quads','front','269,457 292,425 334,423 350,555 312,610 279,570'],
+['Calves','front','177,621 216,618 224,716 204,779 177,751 160,684'],['Calves','front','310,616 349,624 367,685 350,751 325,778 302,712'],
+['Traps','back','742,143 782,146 783,262 757,214 710,190 699,170'],['Traps','back','786,146 812,143 854,171 845,190 810,213 787,262'],
+['RearDelts','back','695,181 723,175 744,213 754,238 716,243 674,224'],['RearDelts','back','826,213 850,176 876,181 897,224 854,243 816,238'],
+['UpperBack','back','708,216 756,236 784,265 784,326 742,306 707,267'],['UpperBack','back','815,235 862,215 863,269 827,306 788,326 788,265'],
+['Lats','back','705,259 747,301 782,326 777,395 739,380 715,341'],['Lats','back','865,259 858,341 833,380 794,395 789,326 823,300'],
+['Triceps','back','661,248 680,229 710,250 703,319 681,328 656,291'],['Triceps','back','862,250 889,230 910,249 918,290 890,328 867,317'],
+['LowerBack','back','748,323 782,343 783,421 755,403 734,368'],['LowerBack','back','790,343 825,323 837,369 813,403 789,421'],
+['Glutes','back','716,404 766,417 781,429 782,467 758,478 718,458 701,435'],['Glutes','back','790,429 810,417 856,404 871,435 852,458 811,478 789,467'],
+['Hamstrings','back','708,473 751,483 775,482 769,598 743,615 709,574'],['Hamstrings','back','798,482 834,483 867,473 865,574 831,615 803,598'],
+['Calves','back','698,623 735,620 747,716 729,776 705,750 682,688'],['Calves','back','835,620 873,623 890,689 870,750 847,776 826,716']
+];
+function renderAnatomy(){const anatomyEl=document.getElementById('anatomy'),detailEl=document.getElementById('muscleDetail');if(!anatomyEl||!detailEl||anatomyEl.querySelector('.muscleZone'))return;const ns='http://www.w3.org/2000/svg';for(const [key,view,points] of MUSCLE_ZONES){const node=document.createElementNS(ns,'polygon');const score=MUSCLE_PRIORITY[key]??(key==='Traps'?MUSCLE_PRIORITY.UpperBack:key==='Glutes'?MUSCLE_PRIORITY.Quads:key==='FrontDelts'?MUSCLE_PRIORITY.SideDelts:key==='Obliques'?MUSCLE_PRIORITY.Abs:55);node.setAttribute('points',points);node.setAttribute('class','muscleZone');node.setAttribute('style',`--intensity:${(.08+score/100*.30).toFixed(2)}`);node.setAttribute('tabindex','0');node.setAttribute('role','button');node.setAttribute('aria-label',`${MUSCLE_NAMES[key]} · ${view==='front'?'спереди':'сзади'} · приоритет ${score}%`);const show=()=>{const sets=MUSCLE_TARGETS[key]??(key==='Traps'?MUSCLE_TARGETS.UpperBack:key==='FrontDelts'?MUSCLE_TARGETS.SideDelts:key==='Obliques'?MUSCLE_TARGETS.Abs:key==='Glutes'?MUSCLE_TARGETS.Quads:null);detailEl.textContent=`${MUSCLE_NAMES[key]} · приоритет ${score}%${sets!=null?` · цель ${sets} сетов/неделю`:''}`};node.addEventListener('click',show);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show()}});anatomyEl.appendChild(node)}}
+
+// Boot only after all const/let bindings and UI handlers are initialized.
+setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll();LifeData.start({getDb:()=>db,setDb:next=>{db=ensureDbShape(next);localStorage.setItem(STORAGE_KEY,JSON.stringify(db));setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll()}});
 </script>
 </body>
 </html>
