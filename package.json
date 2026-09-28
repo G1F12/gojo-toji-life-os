@@ -14,7 +14,7 @@
     "esbuild": "0.28.2"
   },
   "scripts": {
-    "build": "esbuild src/main.js --bundle --minify --format=iife --target=es2020 --outfile=assets/life-data.js",
+    "build": "esbuild src/main.js --bundle --minify --format=iife --target=es2020 --outfile=assets/life-data.js && node scripts/prepare-public.mjs",
     "check": "node --check api/school/sync.js && node --check api/school/calendar.js"
   }
 }
