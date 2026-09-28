@@ -1,6 +1,6 @@
 GOJO × TOJI Life OS v6
 
-Source: authoritative v5.1 FINAL FIXED PWA archive. Original four-day plan, September body history, training/body/nutrition/school features and JSON backup are retained.
+Source: authoritative v5.1 FINAL FIXED PWA archive. The four-day plan and training/body/nutrition/school features are retained. Fresh visitors start with an empty personal history; the private baseline JSON can be imported after opening the app.
 
 Build: Node 22.x, npm ci, npm run build. Vercel framework Other; root directory is this folder. Public browser bundle: assets/life-data.js. Serverless API: api/*.js.
 
