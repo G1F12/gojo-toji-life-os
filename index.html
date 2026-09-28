@@ -6,10 +6,10 @@
 <meta name="theme-color" content="#090c12">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="GT Training">
+<meta name="apple-mobile-web-app-title" content="GT Life OS">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
-<title>GOJO × TOJI Life OS v5.1</title>
+<title>GOJO × TOJI Life OS v6</title>
 <style>
 :root{
  --bg:#090c12;--bg2:#0d121c;--card:#131925;--card2:#182132;--line:#283247;
@@ -17,9 +17,9 @@
  --warn:#ffd06f;--bad:#ff8291;--violet:#a58cff;--shadow:0 14px 34px rgba(0,0,0,.25)
 }
 *{box-sizing:border-box}html,body{margin:0;background:linear-gradient(180deg,#080a0f,#0d1320 58%,#090c12);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Arial,sans-serif}
-body{min-height:100vh;padding-bottom:92px}button,input,select,textarea{font:inherit}
+body{min-height:100vh;padding-bottom:92px;padding-top:env(safe-area-inset-top)}button,input,select,textarea{font:inherit}
 header{position:sticky;top:0;z-index:40;background:rgba(9,12,18,.9);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-.top{max-width:980px;margin:auto;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.top{max-width:980px;margin:auto;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.top .row{flex:0 1 auto}.brand{min-width:0}
 .brand b{font-size:17px}.brand small{display:block;color:var(--muted);margin-top:2px}
 main{max-width:980px;margin:auto;padding:10px}
 .tabs{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:10px}
@@ -57,11 +57,12 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
 .modal{display:none;position:fixed;inset:0;z-index:90;background:rgba(0,0,0,.76);padding:14px;overflow:auto}.modal .card{max-width:690px;margin:36px auto}
 @media(max-width:680px){.tabs{grid-template-columns:repeat(3,1fr)}.grid4{grid-template-columns:1fr 1fr}.grid3{grid-template-columns:1fr 1fr}.muscleMap{grid-template-columns:1fr}.card{padding:12px}.timer{font-size:38px}}
 </style>
+<script src="assets/life-data.js"></script>
 </head>
 <body>
 <header><div class="top">
-  <div class="brand"><b>GOJO × TOJI — Life OS v5.1</b><small>70% Gojo · 30% Toji · lean V-frame · 4×/нед</small></div>
-  <div class="row" style="flex-wrap:nowrap"><button id="installBtn" class="btn small" style="display:none">Установить</button><button class="btn small" onclick="openSettings()">⚙︎</button></div>
+  <div class="brand"><b>GOJO × TOJI — Life OS v6</b><small>70% Gojo · 30% Toji · lean V-frame · 4×/нед</small></div>
+  <div class="row" style="flex-wrap:nowrap;align-items:center"><span id="cloudStatus" class="badge">Локально</span><button id="installBtn" class="btn small" style="display:none">Установить</button><button class="btn small" onclick="openSettings()">⚙︎</button></div>
 </div></header>
 
 <main>
@@ -213,7 +214,8 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
 <section id="data" class="panel">
  <div class="card"><h2>Календарь</h2><div class="row"><button class="btn" onclick="shiftMonth(-1)">‹</button><h3 id="calTitle" class="center" style="flex:3;margin:auto"></h3><button class="btn" onclick="shiftMonth(1)">›</button></div><div id="calendarGrid" class="calendar"></div></div>
  <div class="card"><h3>История тренировок</h3><div id="history"></div></div>
- <div class="card"><h3>Резервная копия</h3><div class="row"><button class="btn" onclick="exportData()">Экспорт JSON</button><label class="btn center" style="cursor:pointer">Импорт JSON<input id="importFile" type="file" accept=".json" style="display:none"></label><button class="btn bad" onclick="resetAll()">Сбросить всё</button></div><p class="tiny muted">Экспорт раз в 1–2 недели. Данные хранятся локально на устройстве.</p></div>
+ <div class="card"><h3>Облако</h3><p id="authState" class="tiny muted">Локальный режим</p><div class="row"><input id="syncEmail" type="email" autocomplete="email" placeholder="Ваш email"><button class="btn primary" onclick="signInToSync()">Sign in to sync</button><button class="btn" onclick="signOutOfSync()">Выйти</button><button class="btn" onclick="LifeData.sync()">↻ Sync</button></div></div>
+ <div class="card"><h3>Резервная копия</h3><div class="row"><button class="btn" onclick="exportData()">Экспорт JSON</button><label class="btn center" style="cursor:pointer">Импорт JSON<input id="importFile" type="file" accept=".json" style="display:none"></label><button class="btn bad" onclick="resetAll()">Сбросить всё</button></div><p class="tiny muted">Экспорт раз в 1–2 недели. После входа Supabase хранит основную копию; локальные данные доступны офлайн.</p></div>
  <div class="card"><h3>Установка на iPhone</h3><p class="tiny">Для полноценной PWA-установки папка должна быть на HTTPS. Открой сайт в Safari → Поделиться → «На экран Домой». После первого запуска приложение кэшируется и работает офлайн.</p></div>
 </section>
 </main>
@@ -221,7 +223,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 5px;b
 <div class="fixed"><div class="inner"><button class="btn" onclick="fillPrevious()">↶ Прошлая</button><button class="btn primary" onclick="saveSession()">Сохранить тренировку</button></div></div>
 
 <div id="settingsModal" class="modal"><div class="card"><div class="row"><h2 style="flex:3">Настройки</h2><button class="btn" onclick="closeSettings()">✕</button></div>
-<label>Профиль</label><input id="profileName"><div class="grid2"><div><label>Рост, см</label><input id="height" type="number"></div><div><label>Стартовый вес</label><input id="startWeight" type="number" step=".1"></div></div><div class="grid2"><div><label>Gojo %</label><input id="gojo" type="number"></div><div><label>Toji %</label><input id="toji" type="number"></div></div><label>Целевые ккал</label><input id="targetKcal" type="number"><label>School sync URL</label><input id="schoolSyncUrl" placeholder="/api/school/sync"><label>Life OS API token (если задан на Vercel)</label><input id="lifeApiToken" type="password" placeholder="необязательно"><button class="btn primary" style="width:100%;margin-top:10px" onclick="saveSettings()">Сохранить</button></div></div>
+<label>Профиль</label><input id="profileName"><div class="grid2"><div><label>Рост, см</label><input id="height" type="number"></div><div><label>Стартовый вес</label><input id="startWeight" type="number" step=".1"></div></div><div class="grid2"><div><label>Gojo %</label><input id="gojo" type="number"></div><div><label>Toji %</label><input id="toji" type="number"></div></div><label>Целевые ккал</label><input id="targetKcal" type="number"><div class="note tiny">School sync использует вход Supabase. Пароли eduVULCAN здесь не хранятся.</div><button class="btn primary" style="width:100%;margin-top:10px" onclick="saveSettings()">Сохранить</button></div></div>
 
 <div id="editorModal" class="modal"><div class="card"><div class="row"><h2 style="flex:3">Редактор программы</h2><button class="btn" onclick="closeEditor()">✕</button></div><div id="editorBody"></div><button class="btn primary" style="width:100%;margin-top:10px" onclick="saveEditor()">Сохранить программу</button></div></div>
 
@@ -269,12 +271,14 @@ const DEFAULT_PLAN={
  ["Abs",2,"10–20",2.5,["Abs"]]
 ]};
 function safeJsonParse(raw){try{return raw?JSON.parse(raw):null}catch{return null}}
-const STORAGE_KEY="gt_life_v5_1";
+const STORAGE_KEY="gt_life_v6";
 let db=safeJsonParse(localStorage.getItem(STORAGE_KEY));
+if(!db)db=safeJsonParse(localStorage.getItem("gt_life_v5_1"));
+if(!db)db=safeJsonParse(localStorage.getItem("gt_life_v5"));
 if(!db)db=safeJsonParse(localStorage.getItem("gt_life_v4"));
 if(!db)db=safeJsonParse(localStorage.getItem("gt_training_v3"));
 const DEFAULT_DB={
- settings:{name:"SUBJECT-01",height:194,startWeight:76.4,gojo:70,toji:30,targetKcal:3000,schoolSyncUrl:"/api/school/sync",lifeApiToken:""},
+ settings:{name:"SUBJECT-01",height:194,startWeight:76.4,gojo:70,toji:30,targetKcal:3000,restTimerSeconds:120},
  plan:structuredClone(DEFAULT_PLAN),sessions:[],body:[
  {date:"2026-09-03",weight:76.5},{date:"2026-09-04",weight:76.9},{date:"2026-09-06",weight:75.7},{date:"2026-09-11",weight:77},{date:"2026-09-16",weight:76.5},{date:"2026-09-23",weight:76}
  ],measurements:[{date:"2026-09-27",chest:94,arm:30,thigh:55,waist:77}],food:[],readiness:[],school:[],timetable:[]
@@ -292,8 +296,8 @@ function ensureDbShape(x){
  x.sessions.forEach(s=>(s.sets||[]).forEach(set=>{if(!Array.isArray(set.muscles)||set.muscles.length===0)set.muscles=muscleByExercise.get(set.exercise)||[]}));
  return x;
 }
-db=ensureDbShape(db||structuredClone(DEFAULT_DB));
-function persist(){localStorage.setItem(STORAGE_KEY,JSON.stringify(db))}
+db=ensureDbShape(db||structuredClone(DEFAULT_DB));delete db.settings.lifeApiToken;
+function persist(){delete db.settings.lifeApiToken;LifeData.record(db);localStorage.setItem(STORAGE_KEY,JSON.stringify(db))}
 function localISODate(d=new Date()){const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");return `${y}-${m}-${day}`}
 function isoToday(){return localISODate()}
 function escHtml(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
@@ -332,13 +336,13 @@ function recommendation(name,range,step){
 }
 function fillRecommendations(){let day=db.plan[daySelect.value];[...document.querySelectorAll(".setrow")].forEach(r=>{let ins=r.querySelectorAll("input"),ei=+ins[0].dataset.e,ex=day[ei],rec=recommendation(ex[0],ex[2],ex[3]);if(rec&&!ins[0].value)ins[0].value=rec.weight});alert("Вес предложен по последней тренировке и правилу double progression.")}
 function fillPrevious(){let day=daySelect.value,prev=[...db.sessions].filter(s=>s.day===day).sort((a,b)=>a.date.localeCompare(b.date)||(a.id||0)-(b.id||0)).at(-1);if(!prev){alert("Прошлой тренировки этого дня ещё нет.");return}[...document.querySelectorAll(".setrow")].forEach((r,i)=>{let p=prev.sets[i];if(!p)return;let ins=r.querySelectorAll("input");ins[0].value=p.weight??"";ins[1].value=p.reps??"";ins[2].value=p.rir??""})}
-function gatherSession(){let day=daySelect.value,list=db.plan[day],sets=[];document.querySelectorAll(".setrow").forEach(r=>{let i=r.querySelectorAll("input"),ei=+i[0].dataset.e;sets.push({exercise:list[ei][0],muscles:list[ei][4]||[],set:+i[0].dataset.s+1,weight:+i[0].value||null,reps:+i[1].value||null,rir:+i[2].value||null,done:r.querySelector(".done").classList.contains("on")})});return{id:Date.now(),date:sessionDate.value||isoToday(),day,sets,duration:+duration.value||null,energy:+energy.value||null,postSoreness:+postSoreness.value||null,note:sessionNote.value.trim()}}
+function gatherSession(){let day=daySelect.value,list=db.plan[day],sets=[];document.querySelectorAll(".setrow").forEach(r=>{let i=r.querySelectorAll("input"),ei=+i[0].dataset.e;sets.push({exercise:list[ei][0],muscles:list[ei][4]||[],set:+i[0].dataset.s+1,weight:+i[0].value||null,reps:+i[1].value||null,rir:i[2].value===""?null:+i[2].value,done:r.querySelector(".done").classList.contains("on")})});return{id:Date.now(),date:sessionDate.value||isoToday(),day,sets,duration:+duration.value||null,energy:+energy.value||null,postSoreness:+postSoreness.value||null,note:sessionNote.value.trim()}}
 function saveSession(){db.sessions.push(gatherSession());persist();refreshAll();alert("Тренировка сохранена.")}
 function showExerciseHistory(enc){let n=decodeURIComponent(enc),h=prevForExercise(n).slice(-14);alert(n+"\n\n"+(h.length?h.map(x=>`${x.date}: ${x.weight}×${x.reps}${x.rir!=null?` @${x.rir}RIR`:""}`).join("\n"):"Истории пока нет"))}
 
 let timerSec=120,timerLeft=120,timerInt=null;
 function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
-function setTimer(s){timerSec=timerLeft=s;timerText.textContent=fmt(s);clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт"}
+function setTimer(s,save=true){db.settings.restTimerSeconds=s;if(save)persist();timerSec=timerLeft=s;timerText.textContent=fmt(s);clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт"}
 function toggleTimer(){if(timerInt){clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт";return}timerToggle.textContent="Пауза";timerInt=setInterval(()=>{timerLeft--;timerText.textContent=fmt(timerLeft);if(timerLeft<=0){clearInterval(timerInt);timerInt=null;timerToggle.textContent="Старт";navigator.vibrate?.([150,100,150]);alert("Отдых закончен");timerLeft=timerSec;timerText.textContent=fmt(timerLeft)}},1000)}
 function startTimerAuto(){timerLeft=timerSec;timerText.textContent=fmt(timerLeft);if(timerInt)clearInterval(timerInt);timerInt=null;toggleTimer()}
 
@@ -429,7 +433,7 @@ function renderWeekly(){
 let calCursor=new Date();
 function shiftMonth(n){calCursor.setMonth(calCursor.getMonth()+n);renderCalendar()}
 function renderCalendar(){let y=calCursor.getFullYear(),m=calCursor.getMonth();calTitle.textContent=new Intl.DateTimeFormat("ru",{month:"long",year:"numeric"}).format(calCursor);let names=["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];calendarGrid.innerHTML=names.map(x=>`<div class="calHead">${x}</div>`).join("");let first=new Date(y,m,1),off=(first.getDay()+6)%7,days=new Date(y,m+1,0).getDate();for(let i=0;i<off;i++)calendarGrid.innerHTML+="<div></div>";for(let d=1;d<=days;d++){let iso=`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`,ss=db.sessions.filter(s=>s.date===iso),bb=db.body.find(x=>x.date===iso);calendarGrid.innerHTML+=`<div class="day ${iso===isoToday()?"today":""}"><b>${d}</b>${ss.map(s=>`<div><span class="dot"></span>${s.day.split("—")[0]}</div>`).join("")}${bb?.weight?`<div class="tiny muted">${bb.weight} кг</div>`:""}</div>`}}
-function renderHistory(){let a=[...db.sessions].reverse();history.innerHTML=a.length?a.slice(0,50).map(s=>`<div class="metric" style="margin:7px 0"><b>${escHtml(s.date)} · ${escHtml(s.day)}</b><div class="tiny muted">${s.sets.filter(x=>x.done).length}/${s.sets.length} сетов · ${s.duration||"—"} мин · энергия ${s.energy||"—"}/10</div>${s.note?`<div class="tiny">${escHtml(s.note)}</div>`:""}</div>`).join(""):"Пока пусто."}
+function renderHistory(){let a=[...db.sessions].reverse();document.getElementById("history").innerHTML=a.length?a.slice(0,50).map(s=>`<div class="metric" style="margin:7px 0"><b>${escHtml(s.date)} · ${escHtml(s.day)}</b><div class="tiny muted">${s.sets.filter(x=>x.done).length}/${s.sets.length} сетов · ${s.duration||"—"} мин · энергия ${s.energy||"—"}/10</div>${s.note?`<div class="tiny">${escHtml(s.note)}</div>`:""}</div>`).join(""):"Пока пусто."}
 
 
 function schoolDaysUntil(due){
@@ -440,14 +444,14 @@ function schoolDaysUntil(due){
 function schoolTypeLabel(t){return t==="homework"?"ДЗ":t==="exam"?"Контрольная":t==="quiz"?"Kartkówka":"Событие"}
 function saveSchoolItem(){
  const item={id:Date.now().toString(),type:schoolType.value,subject:schoolSubject.value.trim()||"Без предмета",title:schoolTitle.value.trim()||"Без описания",due:schoolDue.value||isoToday(),priority:+schoolPriority.value||1,source:schoolSource.value||"manual",done:false,updatedAt:new Date().toISOString()};
- db.school=db.school||[];db.school.push(item);persist();renderSchool();
+ db.school=db.school||[];db.school.push(item);persist();renderSchool();renderToday();
  schoolTitle.value="";alert("Школьное событие добавлено.");
 }
 function toggleSchool(id){
- const x=(db.school||[]).find(i=>i.id===id);if(!x)return;x.done=!x.done;persist();renderSchool()
+ const x=(db.school||[]).find(i=>i.id===id);if(!x)return;x.done=!x.done;persist();renderSchool();renderToday()
 }
 function deleteSchool(id){
- if(!confirm("Удалить событие?"))return;db.school=(db.school||[]).filter(i=>i.id!==id);persist();renderSchool()
+ if(!confirm("Удалить событие?"))return;const item=(db.school||[]).find(i=>i.id===id);if(item){db.deletedSchool??=[];db.deletedSchool.push({...item,deletedAt:new Date().toISOString()})}db.school=(db.school||[]).filter(i=>i.id!==id);persist();renderSchool();renderToday()
 }
 function renderSchool(){
  db.school=db.school||[];
@@ -459,54 +463,37 @@ function renderSchool(){
  schoolUpcoming.innerHTML=upcoming.map(x=>{let d=schoolDaysUntil(x.due),cls=d!=null&&d<=1?"bad":d!=null&&d<=3?"warn":"good";return `<div class="metric" style="margin:7px 0">
    <div class="row"><div style="flex:3"><b>${escHtml(schoolTypeLabel(x.type))} · ${escHtml(x.subject)}</b><div class="tiny">${escHtml(x.title)}</div><div class="tiny muted">${escHtml(x.due)} · ${escHtml(x.source==="eduvulcan"?"eduVULCAN":"manual")}</div></div>
    <div style="max-width:130px"><span class="badge ${cls}">${d<0?"просрочено":d===0?"сегодня":d===1?"завтра":d+" дн."}</span></div></div>
-   <div class="row" style="margin-top:7px"><button class="btn small good" onclick="toggleSchool('${x.id}')">✓ Готово</button><button class="btn small bad" onclick="deleteSchool('${x.id}')">Удалить</button></div>
+   <div class="row" style="margin-top:7px"><button class="btn small good" onclick="toggleSchool('${escAttr(x.id)}')">✓ Готово</button><button class="btn small bad" onclick="deleteSchool('${escAttr(x.id)}')">Удалить</button></div>
   </div>`}).join("")
 }
 async function syncSchool(){
- const url=(db.settings&&db.settings.schoolSyncUrl)||"/api/school/sync";
- try{
-  const headers={"Accept":"application/json"};if(db.settings?.lifeApiToken)headers["Authorization"]="Bearer "+db.settings.lifeApiToken;
-  const r=await fetch(url,{credentials:"include",headers});if(!r.ok){let msg="HTTP "+r.status;try{const j=await r.json();msg=j.message||j.error||msg}catch{}throw new Error(msg)}
-  const payload=await r.json(),items=Array.isArray(payload)?payload:(payload.items||[]),lessons=payload.lessons||[];
-  const manual=(db.school||[]).filter(x=>!x.externalId||x.source==="manual");
-  const doneSynced=(db.school||[]).filter(x=>x.externalId&&x.source!=="manual"&&x.done);
-  const oldMap=new Map((db.school||[]).filter(x=>x.externalId).map(x=>[x.externalId,x]));
-  const synced=items.filter(i=>i.type!=="lesson").map(i=>{const key=i.externalId||[i.type,i.subject,i.due,i.title].join("|"),old=oldMap.get(key);return{id:old?.id||stableClientId(key),externalId:key,type:i.type||"homework",subject:i.subject||"Без предмета",title:i.title||"",due:i.due||isoToday(),priority:i.priority||1,source:i.source||"eduvulcan",done:old?.done||false,updatedAt:new Date().toISOString()}});
-  const doneIds=new Set(doneSynced.map(x=>x.externalId));db.school=[...manual,...doneSynced,...synced.filter(x=>!doneIds.has(x.externalId))];
-  db.timetable=lessons.map(i=>({...i,id:stableClientId(i.externalId||[i.subject,i.due,i.title].join("|"))}));
-  persist();localStorage.setItem("gt_school_sync_at_v5_1",String(Date.now()));renderSchool();renderToday();alert("School sync завершён.");
- }catch(e){alert("School sync не удался: "+e.message)}
+ if(!LifeData.user){alert("Войдите в Supabase для server-side School sync.");return}
+ try{const token=await LifeData.token();const r=await fetch("/api/school/sync",{headers:{Authorization:"Bearer "+token},cache:"no-store"});const j=await r.json();if(!r.ok)throw new Error(j.message||j.error||"HTTP "+r.status);await LifeData.sync();alert("School sync завершён.")}
+ catch(e){alert("School sync: "+e.message)}
 }
+async function signInToSync(){try{const email=syncEmail.value.trim();if(!email)throw new Error("Введите email");await LifeData.signIn(email);alert("Проверьте почту и откройте ссылку на этом устройстве.")}catch(e){alert(e.message)}}
+async function signOutOfSync(){try{await LifeData.signOut()}catch(e){alert(e.message)}}
 
-function openSettings(){settingsModal.style.display="block";profileName.value=db.settings.name;height.value=db.settings.height;startWeight.value=db.settings.startWeight;gojo.value=db.settings.gojo;toji.value=db.settings.toji;targetKcal.value=db.settings.targetKcal;schoolSyncUrl.value=db.settings.schoolSyncUrl||"/api/school/sync";lifeApiToken.value=db.settings.lifeApiToken||""}
+function openSettings(){settingsModal.style.display="block";profileName.value=db.settings.name;height.value=db.settings.height;startWeight.value=db.settings.startWeight;gojo.value=db.settings.gojo;toji.value=db.settings.toji;targetKcal.value=db.settings.targetKcal;}
 function closeSettings(){settingsModal.style.display="none"}
-function saveSettings(){db.settings={...db.settings,name:profileName.value,height:+height.value,startWeight:+startWeight.value,gojo:+gojo.value,toji:+toji.value,targetKcal:+targetKcal.value,schoolSyncUrl:schoolSyncUrl.value.trim()||"/api/school/sync",lifeApiToken:lifeApiToken.value.trim()};persist();closeSettings();refreshAll()}
+function saveSettings(){db.settings={...db.settings,name:profileName.value,height:+height.value,startWeight:+startWeight.value,gojo:+gojo.value,toji:+toji.value,targetKcal:+targetKcal.value};persist();closeSettings();refreshAll()}
 function openEditor(){editorModal.style.display="block";editorBody.innerHTML="";Object.entries(db.plan).forEach(([day,exs],di)=>{let s=document.createElement("div");s.innerHTML=`<h3>${day}</h3>`;exs.forEach((e,ei)=>{s.innerHTML+=`<div class="grid3" style="margin:6px 0"><input data-ed="${di}" data-ee="${ei}" data-k="0" value="${escAttr(e[0])}"><input data-ed="${di}" data-ee="${ei}" data-k="1" type="number" value="${e[1]}"><input data-ed="${di}" data-ee="${ei}" data-k="2" value="${escAttr(e[2])}"></div>`});editorBody.appendChild(s)})}
 function closeEditor(){editorModal.style.display="none"}
 function saveEditor(){let keys=Object.keys(db.plan),p=structuredClone(db.plan);editorBody.querySelectorAll("input").forEach(i=>{let d=+i.dataset.ed,e=+i.dataset.ee,k=+i.dataset.k;p[keys[d]][e][k]=k===1?+i.value:i.value});db.plan=p;persist();closeEditor();initDays();refreshAll();alert("Программа обновлена.")}
 
-function exportData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`GT_Life_OS_v5_1_backup_${isoToday()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function exportData(){let blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`GT_Life_OS_v6_backup_${isoToday()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 schoolImportFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let items=JSON.parse(r.result);if(!Array.isArray(items))items=items.items||[];db.school=db.school||[];const seen=new Set(db.school.map(x=>x.externalId||[x.type,x.subject,x.due,x.title].join("|")));items.filter(i=>i.type!=="lesson").forEach(i=>{const key=i.externalId||[i.type||"homework",i.subject||"",i.due||"",i.title||""].join("|");if(!seen.has(key)){db.school.push({id:i.id||stableClientId(key),externalId:i.externalId||null,type:i.type||"homework",subject:i.subject||"Без предмета",title:i.title||"",due:i.due||isoToday(),priority:+i.priority||1,source:i.source||"manual",done:!!i.done});seen.add(key)}});persist();renderSchool();alert("School JSON импортирован.")}catch{alert("Не удалось импортировать School JSON")}};r.readAsText(f)}
-importFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=ensureDbShape(JSON.parse(r.result));persist();location.reload()}catch{alert("Не удалось импортировать JSON")}};r.readAsText(f)}
-function resetAll(){if(confirm("Удалить все локальные данные?")){localStorage.removeItem(STORAGE_KEY);location.reload()}}
+importFile.onchange=e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db=ensureDbShape(JSON.parse(r.result));delete db.settings.lifeApiToken;persist();location.reload()}catch{alert("Не удалось импортировать JSON")}};r.readAsText(f)}
+async function resetAll(){if(confirm("Удалить локальную копию? Облачные данные останутся доступными.")){await LifeData.clearLocal();localStorage.removeItem(STORAGE_KEY);location.reload()}}
 
 document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));t.classList.add("active");document.getElementById(t.dataset.tab).classList.add("active");if(t.dataset.tab==="progress")refreshProgress();if(t.dataset.tab==="review")renderWeekly();if(t.dataset.tab==="school")renderSchool();if(t.dataset.tab==="data"){renderCalendar();renderHistory()}})
 let deferredPrompt=null;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferredPrompt=e;installBtn.style.display="block"});installBtn.onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;installBtn.style.display="none"}}
 
-async function autoSchoolSync(){
- try{
-  const last=Number(localStorage.getItem("gt_school_sync_at_v5_1")||0);if(Date.now()-last<30*60*1000)return;
-  const url=(db.settings&&db.settings.schoolSyncUrl)||"/api/school/sync",headers={"Accept":"application/json"};if(db.settings?.lifeApiToken)headers["Authorization"]="Bearer "+db.settings.lifeApiToken;
-  const r=await fetch(url,{headers});if(!r.ok)return;const payload=await r.json(),items=Array.isArray(payload)?payload:(payload.items||[]),lessons=payload.lessons||[];
-  const manual=(db.school||[]).filter(x=>!x.externalId||x.source==="manual"),doneSynced=(db.school||[]).filter(x=>x.externalId&&x.source!=="manual"&&x.done),oldMap=new Map((db.school||[]).filter(x=>x.externalId).map(x=>[x.externalId,x]));
-  const synced=items.filter(i=>i.type!=="lesson").map(i=>{const key=i.externalId||[i.type,i.subject,i.due,i.title].join("|"),old=oldMap.get(key);return{id:old?.id||stableClientId(key),externalId:key,type:i.type||"homework",subject:i.subject||"Без предмета",title:i.title||"",due:i.due||isoToday(),priority:i.priority||1,source:i.source||"eduvulcan",done:old?.done||false,updatedAt:new Date().toISOString()}});
-  const doneIds=new Set(doneSynced.map(x=>x.externalId));db.school=[...manual,...doneSynced,...synced.filter(x=>!doneIds.has(x.externalId))];db.timetable=lessons.map(i=>({...i,id:stableClientId(i.externalId||[i.subject,i.due,i.title].join("|"))}));persist();localStorage.setItem("gt_school_sync_at_v5_1",String(Date.now()));renderSchool();renderToday();
- }catch{}
-}
+async function autoSchoolSync(){if(LifeData.user)await LifeData.sync()}
 
 function refreshAll(){renderToday();refreshProgress();renderWeekly();renderCalendar();renderHistory();renderSchool()}
 if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
-initDays();refreshAll();autoSchoolSync();
+setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll();LifeData.start({getDb:()=>db,setDb:next=>{db=ensureDbShape(next);localStorage.setItem(STORAGE_KEY,JSON.stringify(db));setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll()}});
 </script>
 </body>
 </html>

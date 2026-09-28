@@ -1,76 +1,17 @@
-GOJO × TOJI Life OS v5.1 — FIXED
+GOJO × TOJI Life OS v6
 
+Source: authoritative v5.1 FINAL FIXED PWA archive. Original four-day plan, September body history, training/body/nutrition/school features and JSON backup are retained.
 
-V5 adds a real server-side School Sync boundary for Vercel.
+Build: Node 22.x, npm ci, npm run build. Vercel framework Other; root directory is this folder. Public browser bundle: assets/life-data.js. Serverless API: api/*.js.
 
-Endpoints
-- GET /api/health
-- GET /api/school/status
-- GET /api/school/sync
-- GET /api/school/calendar?token=...
-  Returns an ICS calendar containing homework/exams.
+Supabase project: gojo-toji-life-os, Frankfurt eu-central-1, ref tnorzynsakwyacnukzjy. Apply supabase/migrations/20260928000000_life_os_v6.sql to a new dedicated project only. This schema has already been applied to that project. Browser contains a publishable key; no service key is bundled.
 
-Providers
-1) hebece
-   Uses the current `hebece` Node package and its mobile eduVULCAN API client.
-   Required Vercel env vars:
-     SCHOOL_PROVIDER=hebece
-     EDUVULCAN_API_AP=<the /api/ap activation payload>
-     EDUVULCAN_KEYPAIR_JSON=<JSON with fingerprint/privateKey/certificate>
-     EDUVULCAN_PUPIL_ID=<optional>
-     LIFE_OS_API_TOKEN=<strong random token>
+Sign-in: Supabase Auth email magic link. Configure the final HTTPS production URL in Supabase Auth URL Configuration (Site URL and Redirect URLs). The user enters their own email; no account is hardcoded. Local mode works without signing in.
 
-   Important: the PWA never stores your eduVULCAN password.
-   The hebece project labels itself experimental. If eduVULCAN changes its undocumented API,
-   only the provider adapter in lib/providers/hebece.js should need replacement.
+Offline/conflicts: UI saves synchronously to localStorage, then an IndexedDB snapshot and pending queue batch. Online authenticated sync compares UUID records with cloud updated_at and chooses the newer timestamp. Server rows win ties. Immutable workout history has stable UUIDs; date-keyed body/nutrition/readiness uses deterministic UUIDs. Once synced, the cloud snapshot is hydrated into the UI and the queue is cleared. On network error the local write stands and the batch remains pending. The cloud is authoritative after reconciliation. A per-user migration marker is set after successful reconciliation; deterministic IDs and upsert prevent duplicate v5.1 records on subsequent launches. Existing localStorage versions v5.1, v5, v4 and v3 are read.
 
-2) feed
-   For a private bridge such as a self-hosted sync service:
-     SCHOOL_PROVIDER=feed
-     SCHOOL_FEED_URL=https://...
-     SCHOOL_FEED_TOKEN=...
-     LIFE_OS_API_TOKEN=...
+Security: all 12 user-facing tables have owner RLS with auth.uid() = user_id for read, insert, update and delete. School sync is a Node 22 Vercel function because hebece 0.2.4 is Node-oriented; it verifies the user's Supabase JWT and writes under that user's RLS. Tasks and regular lessons are separate. Missing provider credentials return NOT_CONFIGURED. Server-only Vercel variables are SCHOOL_PROVIDER=hebece, EDUVULCAN_API_AP, EDUVULCAN_KEYPAIR_JSON, optional EDUVULCAN_PUPIL_ID; alternative feed provider uses SCHOOL_PROVIDER=feed, SCHOOL_FEED_URL, SCHOOL_FEED_TOKEN. Never store an eduVULCAN password in the PWA. The ICS endpoint uses Bearer JWT and reads school_items under RLS; it is deliberately not a public token-in-URL feed.
 
-Security
-- Set LIFE_OS_API_TOKEN in production.
-- Enter the same token once in Life OS Settings; it is stored locally on your device.
-- Never commit eduVULCAN secrets to Git.
-- Do not put eduVULCAN login/password in index.html/localStorage.
+PWA: install in Safari via Share → Add to Home Screen. Shell, manifest, icons and bundled data client are precached; /api/* and cross-origin Supabase/Auth responses are never cached. Auth and synchronization require network, while all local UI functions and pending writes work offline.
 
-Frontend
-- School sync defaults to same-origin /api/school/sync.
-- Best-effort auto-sync runs at app startup, at most once every 30 minutes.
-- Manual Sync still exists.
-- Today page includes a School Load score and upcoming tasks.
-- School load can adjust the readiness advice, but never automatically cancels a workout.
-- v4 local data is retained through the existing migration logic.
-
-Calendar
-- /api/school/calendar can be subscribed as an ICS feed if the endpoint is reachable and token-protected.
-- Use ?token=<LIFE_OS_API_TOKEN> when a calendar client cannot send Authorization headers.
-
-Deploy to Vercel
-1. Upload this whole project.
-2. Add the chosen environment variables in Project Settings.
-3. Deploy production.
-4. Test /api/health and /api/school/status.
-5. Configure the hebece activation material or the private feed.
-6. Open Life OS → Settings and set the API token.
-7. School → Sync.
-
-No credentials are included in this package.
-
-
-V5.1 fixes:
-- Correct parsing of HebeCE VulcanHebeDate objects (Deadline.Date / Date.Date).
-- Correct Lesson TimeSlot/Room/Teacher fields.
-- Lessons are separated from homework/exams and no longer inflate School Load.
-- Service worker never caches /api/* responses.
-- School API is private-by-default if LIFE_OS_API_TOKEN is missing.
-- Local dates use device local date, not UTC.
-- New v5.1 storage key with automatic migration from v4/v3.
-- Blank check-in fields no longer erase previously saved values.
-- Weekly volume counts direct/primary sets instead of counting every secondary muscle as a full set.
-- Safer school rendering/import and stale synced tasks are pruned.
-- Export filename/version corrected.
-- Fixed exercise muscle metadata index; weekly direct-set volume now works and old sessions are repaired during migration.
+JSON export/import remains a secondary backup. Imported rows keep their identifiers where possible and are queued for cloud reconciliation after sign-in.

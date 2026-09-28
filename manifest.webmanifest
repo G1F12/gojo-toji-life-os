@@ -1,12 +1,12 @@
 {
-  "name": "GOJO × TOJI Life OS v5.1",
+  "name": "GOJO × TOJI Life OS v6",
   "short_name": "GT Life OS",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#090c12",
   "theme_color": "#090c12",
-  "description": "Training + School Life OS with fixed secure eduVULCAN sync.",
+  "description": "Offline training and school Life OS with cloud synchronization.",
   "icons": [
     {
       "src": "icon-192.png",
