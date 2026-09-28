@@ -6,7 +6,8 @@ export default async function handler(req,res){
  if(req.method!=='GET'&&req.method!=='POST')return fail(res,405,'method_not_allowed');
  const context=await authenticated(req);if(!context)return fail(res,401,'unauthorized');
  const provider=(process.env.SCHOOL_PROVIDER||'').toLowerCase();
- if(!provider||provider==='hebece'&&(!process.env.EDUVULCAN_API_AP||!process.env.EDUVULCAN_KEYPAIR_JSON)||provider==='feed'&&!process.env.SCHOOL_FEED_URL)return fail(res,503,'NOT_CONFIGURED');
+ const hebeceConfigured=!!(process.env.EDUVULCAN_KEYPAIR_JSON&&(process.env.EDUVULCAN_API_AP||(process.env.EDUVULCAN_LOGIN&&process.env.EDUVULCAN_PASSWORD)));
+ if(!provider||provider==='hebece'&&!hebeceConfigured||provider==='feed'&&!process.env.SCHOOL_FEED_URL)return fail(res,503,'NOT_CONFIGURED');
  const {client,user}=context,now=new Date().toISOString();
  try{
   const {items}=await fetchSchoolData(),tasks=items.filter(x=>x.type!=='lesson'),lessons=items.filter(x=>x.type==='lesson');
@@ -21,5 +22,5 @@ export default async function handler(req,res){
   if(lessonRows.length){const {error}=await client.from('school_lessons').upsert(lessonRows,{onConflict:'id'});if(error)throw error}
   await client.from('school_sync_state').upsert({user_id:user.id,provider,status:'READY',last_sync_at:now,last_success_at:now,last_error:null,updated_at:now});
   return json(res,200,{ok:true,provider,items:tasks.length,lessons:lessons.length,syncedAt:now});
- }catch(error){console.error('school-sync',error);await client.from('school_sync_state').upsert({user_id:user.id,provider,status:'ERROR',last_sync_at:now,last_error:String(error.message||error).slice(0,500),updated_at:now});return fail(res,502,'school_sync_failed')}
+ }catch(error){const message=String(error.message||error).slice(0,500);console.error('school-sync',message);await client.from('school_sync_state').upsert({user_id:user.id,provider,status:'ERROR',last_sync_at:now,last_error:message,updated_at:now});return fail(res,502,'school_sync_failed')}
 }
