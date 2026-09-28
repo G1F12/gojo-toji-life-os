@@ -493,7 +493,7 @@ async function autoSchoolSync(){if(LifeData.user)await LifeData.sync()}
 
 function refreshAll(){renderToday();refreshProgress();renderWeekly();renderCalendar();renderHistory();renderSchool()}
 if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
-setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll();LifeData.start({getDb:()=>db,setDb:next=>{db=ensureDbShape(next);localStorage.setItem(STORAGE_KEY,JSON.stringify(db));setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll()}});
+
 let toastTimer;
 function toastMessage(message){const el=document.getElementById('toast');el.textContent=String(message).replaceAll('\n',' · ').slice(0,180);el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3600)}
 const loginEls={
@@ -598,6 +598,9 @@ const MUSCLE_ZONES=[
 ['Calves','back','698,623 735,620 747,716 729,776 705,750 682,688'],['Calves','back','835,620 873,623 890,689 870,750 847,776 826,716']
 ];
 function renderAnatomy(){const anatomyEl=document.getElementById('anatomy'),detailEl=document.getElementById('muscleDetail');if(!anatomyEl||!detailEl||anatomyEl.querySelector('.muscleZone'))return;const ns='http://www.w3.org/2000/svg';for(const [key,view,points] of MUSCLE_ZONES){const node=document.createElementNS(ns,'polygon');const score=MUSCLE_PRIORITY[key]??(key==='Traps'?MUSCLE_PRIORITY.UpperBack:key==='Glutes'?MUSCLE_PRIORITY.Quads:key==='FrontDelts'?MUSCLE_PRIORITY.SideDelts:key==='Obliques'?MUSCLE_PRIORITY.Abs:55);node.setAttribute('points',points);node.setAttribute('class','muscleZone');node.setAttribute('style',`--intensity:${(.08+score/100*.30).toFixed(2)}`);node.setAttribute('tabindex','0');node.setAttribute('role','button');node.setAttribute('aria-label',`${MUSCLE_NAMES[key]} · ${view==='front'?'спереди':'сзади'} · приоритет ${score}%`);const show=()=>{const sets=MUSCLE_TARGETS[key]??(key==='Traps'?MUSCLE_TARGETS.UpperBack:key==='FrontDelts'?MUSCLE_TARGETS.SideDelts:key==='Obliques'?MUSCLE_TARGETS.Abs:key==='Glutes'?MUSCLE_TARGETS.Quads:null);detailEl.textContent=`${MUSCLE_NAMES[key]} · приоритет ${score}%${sets!=null?` · цель ${sets} сетов/неделю`:''}`};node.addEventListener('click',show);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show()}});anatomyEl.appendChild(node)}}
+
+// Boot only after all const/let bindings and UI handlers are initialized.
+setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll();LifeData.start({getDb:()=>db,setDb:next=>{db=ensureDbShape(next);localStorage.setItem(STORAGE_KEY,JSON.stringify(db));setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll()}});
 </script>
 </body>
 </html>
