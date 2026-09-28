@@ -1,7 +1,7 @@
 import {createClient} from '@supabase/supabase-js';
 import {readLocal,writeLocal,writePending,clearPending} from './localStore.js';
 import {toRows,fromRows,mergeRows,TABLES} from './migrations.js';
-const client=createClient('https://tnorzynsakwyacnukzjy.supabase.co','sb_publishable_JwQFqL4ZYzjtaDIRF5fdWQ_Z9HZ8SsO',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const client=createClient('https://tnorzynsakwyacnukzjy.supabase.co','sb_publishable_JwQFqL4ZYzjtaDIRF5fdWQ_Z9HZ8SsO',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
 const OWNER_EMAIL='al.koroteev16@gmail.com';
 let getDb,setDb,user=null,busy=false,revision=0,previous='',timer=null;
 const status=(message)=>{const el=document.getElementById('cloudStatus');if(el){el.textContent=message;el.dataset.state=user?'connected':'disconnected'}const auth=document.getElementById('authState');if(auth)auth.textContent=user?'Синхронизация включена. Все изменения сохраняются автоматически.':'Синхронизация выключена. Войдите, чтобы сохранять данные в облаке и использовать их на других устройствах.';document.dispatchEvent(new CustomEvent('life-auth-change',{detail:{signedIn:!!user,message}}));};

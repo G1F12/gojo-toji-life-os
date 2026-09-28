@@ -67,6 +67,23 @@ main{max-width:800px;padding:18px 16px 30px}h2{font-size:21px;letter-spacing:-.0
 .muscleMap{display:block}.silhouette{padding:0;background:#100e1c;border:0;overflow:hidden;border-radius:18px}.silhouette svg{display:block;width:100%;height:auto}.muscleZone{fill:#8d95f8;fill-opacity:var(--intensity);stroke:#e7e4ff;stroke-width:1.5;stroke-opacity:.55;cursor:pointer;transition:fill-opacity .18s}.muscleZone:hover,.muscleZone:focus{fill-opacity:.8;stroke-width:2.5}.muscleLegend{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:12px;font-size:13px;color:var(--muted)}.legendGradient{width:110px;height:8px;border-radius:20px;background:linear-gradient(90deg,#c1c4d5,#758eea)}.muscleDetail{min-height:35px;text-align:center;font-size:14px;padding:10px;color:#dfe4ff}
 @media(max-width:680px){.grid3{grid-template-columns:1fr 1fr}.grid4{grid-template-columns:1fr 1fr}.card{padding:17px}.muscleMap{grid-template-columns:1fr}.top{padding:10px 14px}.headerActions .badge{font-size:10px;max-width:125px;line-height:1.2}.headerLogin{display:inline-flex;align-items:center}.brand small{font-size:11px}.modal{align-items:flex-end;padding:0}.modal .card{max-width:none;max-height:calc(100dvh - env(safe-area-inset-top) - 20px);border-radius:24px 24px 0 0;padding:23px 18px calc(22px + env(safe-area-inset-bottom))}.grid3 .row{min-width:0}}
 @media(max-width:375px){.top{gap:5px}.brand b{font-size:16px}.headerActions{gap:4px}.headerActions .badge{max-width:106px;padding:6px}.headerLogin{padding:6px 8px;font-size:12px;min-height:40px}.iconBtn{width:40px;height:40px}.card{padding:15px}}
+
+/* v6 QA hotfix: desktop layout */
+@media (min-width:681px){
+  .top{max-width:1180px;margin:0 auto;padding:12px 20px}
+  main{max-width:1180px;padding:22px 20px 125px}
+  .headerLogin{display:inline-flex!important;align-items:center}
+  .bottomNav{
+    left:50%;right:auto;bottom:18px;transform:translateX(-50%);
+    width:min(760px,calc(100vw - 32px));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+    padding:6px;
+    box-shadow:0 18px 45px #0007
+  }
+  .silhouette{max-width:900px;margin:0 auto}
+}
+
 </style>
 <script src="assets/life-data.js"></script>
 </head>
@@ -479,14 +496,84 @@ if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigato
 setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll();LifeData.start({getDb:()=>db,setDb:next=>{db=ensureDbShape(next);localStorage.setItem(STORAGE_KEY,JSON.stringify(db));setTimer(db.settings.restTimerSeconds||120,false);initDays();refreshAll()}});
 let toastTimer;
 function toastMessage(message){const el=document.getElementById('toast');el.textContent=String(message).replaceAll('\n',' · ').slice(0,180);el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3600)}
-function openLogin(){closeSettings();closeMore();loginError.textContent='';ownerPassword.value='';loginModal.classList.add('open');setTimeout(()=>ownerPassword.focus(),180)}
-function closeLogin(){loginModal.classList.remove('open');ownerPassword.value='';loginError.textContent=''}
-showPassword.onclick=()=>{const visible=ownerPassword.type==='text';ownerPassword.type=visible?'password':'text';showPassword.textContent=visible?'Показать':'Скрыть';showPassword.setAttribute('aria-label',visible?'Показать пароль':'Скрыть пароль')};
-loginForm.addEventListener('submit',async e=>{e.preventDefault();loginError.textContent='';loginSubmit.disabled=true;loginSubmit.textContent='Входим…';try{await LifeData.signIn(ownerPassword.value);closeLogin();renderSyncActions();toastMessage('Синхронизация включена')}catch(error){loginError.textContent=!navigator.onLine||/fetch|network|connection|timeout/i.test(error.message)?'Нет соединения':/invalid|credentials|password|grant/i.test(error.message)?'Неверный пароль':'Не удалось войти';ownerPassword.select()}finally{loginSubmit.disabled=false;loginSubmit.textContent='Войти'}});
-function renderSyncActions(){const signedIn=!!LifeData.user;headerLogin.classList.toggle('hidden',signedIn);const content=signedIn?'<button class="btn primary" onclick="syncNow()">Синхронизировать сейчас</button><button class="btn" onclick="signOutOfSync()">Выйти</button>':'<button class="btn primary" onclick="openLogin()">Войти</button>';dataSyncActions.innerHTML=content;settingsSyncActions.innerHTML=content;settingsSyncState.textContent=signedIn?'Синхронизация включена. Все изменения сохраняются автоматически.':'Синхронизация выключена.'}
+const loginEls={
+ modal:document.getElementById('loginModal'),
+ form:document.getElementById('loginForm'),
+ password:document.getElementById('ownerPassword'),
+ show:document.getElementById('showPassword'),
+ error:document.getElementById('loginError'),
+ submit:document.getElementById('loginSubmit')
+};
+function openLogin(){
+ closeSettings();closeMore();
+ loginEls.error.textContent='';
+ loginEls.password.value='';
+ loginEls.modal.classList.add('open');
+ setTimeout(()=>loginEls.password.focus(),180)
+}
+function closeLogin(){
+ loginEls.modal.classList.remove('open');
+ loginEls.password.value='';
+ loginEls.error.textContent=''
+}
+loginEls.show.addEventListener('click',()=>{
+ const visible=loginEls.password.type==='text';
+ loginEls.password.type=visible?'password':'text';
+ loginEls.show.textContent=visible?'Показать':'Скрыть';
+ loginEls.show.setAttribute('aria-label',visible?'Показать пароль':'Скрыть пароль')
+});
+loginEls.form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const password=loginEls.password.value;
+ loginEls.error.textContent='';
+ if(!password){
+   loginEls.error.textContent='Введите пароль';
+   loginEls.password.focus();
+   return
+ }
+ loginEls.submit.disabled=true;
+ loginEls.submit.textContent='Входим…';
+ try{
+   const signedUser=await LifeData.signIn(password);
+   if(!signedUser)throw new Error('AUTH_NO_USER');
+   closeLogin();
+   renderSyncActions();
+   toastMessage('Синхронизация включена')
+ }catch(error){
+   console.error('Life OS login',error);
+   const message=String(error?.message||'');
+   loginEls.error.textContent=
+     !navigator.onLine||/fetch|network|connection|timeout/i.test(message)
+       ?'Нет соединения'
+       :/invalid|credentials|password|grant/i.test(message)
+         ?'Неверный пароль'
+         :'Не удалось войти';
+   loginEls.password.focus();
+   loginEls.password.select()
+ }finally{
+   loginEls.submit.disabled=false;
+   loginEls.submit.textContent='Войти'
+ }
+});
+function renderSyncActions(){
+ const signedIn=!!LifeData.user;
+ const headerLoginEl=document.getElementById('headerLogin');
+ const dataActionsEl=document.getElementById('dataSyncActions');
+ const settingsActionsEl=document.getElementById('settingsSyncActions');
+ const settingsStateEl=document.getElementById('settingsSyncState');
+ headerLoginEl?.classList.toggle('hidden',signedIn);
+ const content=signedIn
+   ?'<button class="btn primary" onclick="syncNow()">Синхронизировать сейчас</button><button class="btn" onclick="signOutOfSync()">Выйти</button>'
+   :'<button class="btn primary" onclick="openLogin()">Войти</button>';
+ if(dataActionsEl)dataActionsEl.innerHTML=content;
+ if(settingsActionsEl)settingsActionsEl.innerHTML=content;
+ if(settingsStateEl)settingsStateEl.textContent=signedIn
+   ?'Синхронизация включена. Все изменения сохраняются автоматически.'
+   :'Синхронизация выключена.'
+}
 async function syncNow(){if(!navigator.onLine){toastMessage('Нет соединения');return}await LifeData.sync();toastMessage('Синхронизация запущена')}
 document.addEventListener('life-auth-change',renderSyncActions);renderSyncActions();
-for(const modal of [loginModal,settingsModal,editorModal,historyModal])modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('open');modal.style.display='';}});
+for(const id of ['loginModal','settingsModal','editorModal','historyModal']){const modal=document.getElementById(id);if(modal)modal.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('open');modal.style.display='';}})}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLogin();closeSettings();closeEditor();closeMore()}});
 const MUSCLE_NAMES={Chest:'Грудные',SideDelts:'Средние дельты',FrontDelts:'Передние дельты',RearDelts:'Задние дельты',Biceps:'Бицепс',Triceps:'Трицепс',Abs:'Пресс',Obliques:'Косые мышцы',Quads:'Квадрицепс',Calves:'Икры',Traps:'Трапеции',UpperBack:'Верх спины',Lats:'Широчайшие',LowerBack:'Поясница',Glutes:'Ягодичные',Hamstrings:'Задняя поверхность бедра'};
 // Polygon positions follow the supplied front/back anatomy reference; the source image is local.
@@ -510,7 +597,7 @@ const MUSCLE_ZONES=[
 ['Hamstrings','back','708,473 751,483 775,482 769,598 743,615 709,574'],['Hamstrings','back','798,482 834,483 867,473 865,574 831,615 803,598'],
 ['Calves','back','698,623 735,620 747,716 729,776 705,750 682,688'],['Calves','back','835,620 873,623 890,689 870,750 847,776 826,716']
 ];
-function renderAnatomy(){if(anatomy.querySelector('.muscleZone'))return;const ns='http://www.w3.org/2000/svg';for(const [key,view,points] of MUSCLE_ZONES){const node=document.createElementNS(ns,'polygon');const score=MUSCLE_PRIORITY[key]??(key==='Traps'?MUSCLE_PRIORITY.UpperBack:key==='Glutes'?MUSCLE_PRIORITY.Quads:key==='FrontDelts'?MUSCLE_PRIORITY.SideDelts:key==='Obliques'?MUSCLE_PRIORITY.Abs:55);node.setAttribute('points',points);node.setAttribute('class','muscleZone');node.setAttribute('style',`--intensity:${(.08+score/100*.30).toFixed(2)}`);node.setAttribute('tabindex','0');node.setAttribute('role','button');node.setAttribute('aria-label',`${MUSCLE_NAMES[key]} · ${view==='front'?'спереди':'сзади'} · приоритет ${score}%`);const show=()=>{const sets=MUSCLE_TARGETS[key]??(key==='Traps'?MUSCLE_TARGETS.UpperBack:key==='FrontDelts'?MUSCLE_TARGETS.SideDelts:key==='Obliques'?MUSCLE_TARGETS.Abs:key==='Glutes'?MUSCLE_TARGETS.Quads:null);muscleDetail.textContent=`${MUSCLE_NAMES[key]} · приоритет ${score}%${sets!=null?` · цель ${sets} сетов/неделю`:''}`};node.addEventListener('click',show);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show()}});anatomy.appendChild(node)}}
+function renderAnatomy(){const anatomyEl=document.getElementById('anatomy'),detailEl=document.getElementById('muscleDetail');if(!anatomyEl||!detailEl||anatomyEl.querySelector('.muscleZone'))return;const ns='http://www.w3.org/2000/svg';for(const [key,view,points] of MUSCLE_ZONES){const node=document.createElementNS(ns,'polygon');const score=MUSCLE_PRIORITY[key]??(key==='Traps'?MUSCLE_PRIORITY.UpperBack:key==='Glutes'?MUSCLE_PRIORITY.Quads:key==='FrontDelts'?MUSCLE_PRIORITY.SideDelts:key==='Obliques'?MUSCLE_PRIORITY.Abs:55);node.setAttribute('points',points);node.setAttribute('class','muscleZone');node.setAttribute('style',`--intensity:${(.08+score/100*.30).toFixed(2)}`);node.setAttribute('tabindex','0');node.setAttribute('role','button');node.setAttribute('aria-label',`${MUSCLE_NAMES[key]} · ${view==='front'?'спереди':'сзади'} · приоритет ${score}%`);const show=()=>{const sets=MUSCLE_TARGETS[key]??(key==='Traps'?MUSCLE_TARGETS.UpperBack:key==='FrontDelts'?MUSCLE_TARGETS.SideDelts:key==='Obliques'?MUSCLE_TARGETS.Abs:key==='Glutes'?MUSCLE_TARGETS.Quads:null);detailEl.textContent=`${MUSCLE_NAMES[key]} · приоритет ${score}%${sets!=null?` · цель ${sets} сетов/неделю`:''}`};node.addEventListener('click',show);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show()}});anatomyEl.appendChild(node)}}
 </script>
 </body>
 </html>
