@@ -1,6 +1,1 @@
-
-export default function handler(req,res){
-  res.statusCode=200;
-  res.setHeader("Content-Type","application/json; charset=utf-8");
-  res.end(JSON.stringify({ok:true,app:"GOJO × TOJI Life OS",version:"5.0.0",time:new Date().toISOString()}));
-}
+export default function handler(req,res){res.statusCode=200;res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','no-store');res.end(JSON.stringify({ok:true,app:'GOJO × TOJI Life OS',version:'6.0.0',schoolProviderConfigured:!!process.env.SCHOOL_PROVIDER,time:new Date().toISOString()}))}

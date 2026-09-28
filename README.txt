@@ -15,4 +15,3 @@ Security: all 12 user-facing tables have owner RLS with auth.uid() = user_id for
 PWA: install in Safari via Share → Add to Home Screen. Shell, manifest, icons and bundled data client are precached; /api/* and cross-origin Supabase/Auth responses are never cached. Auth and synchronization require network, while all local UI functions and pending writes work offline.
 
 JSON export/import remains a secondary backup. Imported rows keep their identifiers where possible and are queued for cloud reconciliation after sign-in.
-Vercel trigger 
